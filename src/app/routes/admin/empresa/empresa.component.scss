@@ -1,0 +1,24 @@
+.small-width {
+  width: 25%; /* Ajusta según sea necesario para el ancho de cada campo en la primera fila */
+  margin-right: 2%;
+}
+
+.medium-width {
+  width: 100%; /* Ajusta según sea necesario para el ancho de cada campo en la primera fila */
+  margin-right: 2%; /* Agrega un pequeño margen entre los campos */
+}
+
+.large-width {
+  width: 80%;
+  margin-right: 2%; /* Ajusta según sea necesario para el ancho completo de la tarjeta en pantallas grandes */
+}
+
+.row {
+  justify-content: center;
+  margin: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}

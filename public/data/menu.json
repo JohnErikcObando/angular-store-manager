@@ -1,0 +1,101 @@
+{
+  "menu": [
+    {
+      "route": "dashboard",
+      "name": "dashboard",
+      "type": "link",
+      "icon": "dashboard"
+    },
+
+    {
+      "route": "admin",
+      "name": "admin",
+      "type": "sub",
+      "icon": "manage_accounts",
+      "children": [
+        {
+          "route": "empresa",
+          "name": "empresa",
+          "type": "link"
+        },
+        {
+          "route": "dashboard",
+          "name": "dashboard",
+          "type": "link"
+        },
+        {
+          "route": "usuario",
+          "name": "usuario",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "route": "configuracion",
+      "name": "configuracion",
+      "type": "sub",
+      "icon": "settings",
+      "children": [
+        {
+          "route": "categoria",
+          "name": "categoria",
+          "type": "link"
+        },
+        {
+          "route": "cliente",
+          "name": "cliente",
+          "type": "link"
+        },
+        {
+          "route": "forma-pago",
+          "name": "forma-pago",
+          "type": "link"
+        },
+        {
+          "route": "impuesto",
+          "name": "impuesto",
+          "type": "link"
+        },
+        {
+          "route": "producto",
+          "name": "producto",
+          "type": "link"
+        },
+        {
+          "route": "proveedor",
+          "name": "proveedor",
+          "type": "link"
+        },
+        {
+          "route": "marca",
+          "name": "marca",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "route": "factura",
+      "name": "factura",
+      "type": "sub",
+      "icon": "receipt_long",
+      "children": [
+        {
+          "route": "factura-compra",
+          "name": "factura-compra",
+          "type": "link"
+        },
+        {
+          "route": "factura-venta",
+          "name": "factura-venta",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "route": "movimiento",
+      "name": "movimiento",
+      "type": "link",
+      "icon": "trending_up"
+    }
+  ]
+}

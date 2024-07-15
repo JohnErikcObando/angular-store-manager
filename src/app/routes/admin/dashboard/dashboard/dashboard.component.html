@@ -1,0 +1,83 @@
+<page-header />
+
+<div class="row">
+  <div class="col-sm-6 col-md-6">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-subtitle>Ventas Totales</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <h2 class="m-t-0 m-b-8">Ventas</h2>
+
+        <small class="text-muted">$1000000</small>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="col-sm-6 col-md-6">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-subtitle>Gastos Totales</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <h2 class="m-t-0 m-b-8">Gastos</h2>
+
+        <small class="text-muted">$500000</small>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="col-md-12">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Movimientos Por Mes</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="card-content">
+        <app-bar-charts />
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Charts -->
+  <div class="col-md-6">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Ventas Por Mes</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="card-content">
+        <app-line-charts />
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="col-md-6">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Recaudo por Dias</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="card-content">
+        <app-horizontal-bar-charts />
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="col-md-6">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Venta de Producto Por Mes</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="card-content">
+        <app-bar-groups-charts />
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="col-md-6">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Ventas Por Semana</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="card-content">
+        <app-pie-charts />
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
