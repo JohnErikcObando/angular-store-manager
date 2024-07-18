@@ -4,3 +4,7 @@ export interface Marca {
   descripcion: string;
   usuarioModif: string;
 }
+
+export interface CreateMarcaDTO extends Omit<Marca, 'id'> {}
+
+export interface UpdateMarcaDTO extends Partial<CreateMarcaDTO> {}

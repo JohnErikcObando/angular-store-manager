@@ -1,5 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormGroup,
   FormsModule,
@@ -7,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { PageHeaderComponent } from '@shared';
+import { FormValidationService, PageHeaderComponent } from '@shared';
 
 // material
 import { LayoutModule } from '@angular/cdk/layout';
@@ -51,8 +52,9 @@ export class EmpresaComponent implements OnInit {
   private validatorsService = inject(ValidatorsService);
   private empresaService = inject(EmpresaService);
   private sweetalert2Service = inject(Sweetalert2Service);
+  private formValidationService = inject(FormValidationService);
 
-  empresa: Empresa[] = [];
+  empresa = signal<Empresa[]>([]);
 
   readonly form: FormGroup = this.fb.group({
     id: ['', Validators.required],
@@ -61,7 +63,7 @@ export class EmpresaComponent implements OnInit {
     telefono: ['', [Validators.maxLength(10), Validators.minLength(10)]],
     celular: ['', [Validators.maxLength(10), Validators.minLength(10)]],
     logo: [''],
-    email: ['', [Validators.required, Validators.pattern(this.validatorsService.emailPattern)]],
+    email: ['', [Validators.required, Validators.email, this.validatorsService.validateEmail()]],
     usuarioModif: ['MiMascota', Validators.required],
   });
 
@@ -89,7 +91,7 @@ export class EmpresaComponent implements OnInit {
 
   private getAll() {
     this.empresaService.getAll().subscribe(data => {
-      this.empresa = data;
+      this.empresa.set(data);
       data.forEach(empresa => {
         this.get(empresa.id.toString());
       });
@@ -99,13 +101,20 @@ export class EmpresaComponent implements OnInit {
   private get(id: string) {
     this.empresaService.get(id).subscribe({
       next: data => {
-        this.empresa = data;
-        this.form.patchValue(data);
-        console.log(this.empresa);
+        this.empresa.set(data);
+        this.form.patchValue(this.empresa());
       },
       error: errorMsg => {
         window.alert(errorMsg);
       },
     });
+  }
+
+  getErrorMessage(controlName: string): string {
+    const control: AbstractControl | null = this.form.get(controlName);
+    if (control) {
+      return this.formValidationService.getErrorMessage(control);
+    }
+    return '';
   }
 }

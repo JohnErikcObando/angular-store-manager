@@ -8,3 +8,7 @@ export interface Proveedor {
   activo: boolean;
   usuarioModif: string;
 }
+
+export interface CreateProveedorDTO extends Omit<Proveedor, 'id'> {}
+
+export interface UpdateProveedorDTO extends Partial<CreateProveedorDTO> {}

@@ -1,7 +1,7 @@
 export interface Inventario {
-  id:         number;
+  id: number;
   productoId: number;
-  entrada:    number;
-  salida:     number;
-  saldo:      number;
+  entrada: number;
+  salida: number;
+  saldo: number;
 }

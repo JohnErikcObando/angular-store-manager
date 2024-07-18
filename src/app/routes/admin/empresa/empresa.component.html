@@ -13,7 +13,7 @@
             <mat-label>Nit</mat-label>
             <input formControlName="id" matInput placeholder="Nit" />
             @if (form.get('id')?.invalid) {
-              <mat-error>{{ 'Campo Requerido' }}</mat-error>
+              <mat-error>{{ getErrorMessage('id') }}</mat-error>
             }
           </mat-form-field>
         </div>
@@ -22,7 +22,7 @@
             <mat-label>Nombre</mat-label>
             <input formControlName="nombre" matInput placeholder="Nombre" />
             @if (form.get('nombre')?.invalid) {
-              <mat-error>{{ 'Campo Requerido' }}</mat-error>
+              <mat-error>{{ getErrorMessage('nombre') }}</mat-error>
             }
           </mat-form-field>
         </div>
@@ -31,10 +31,8 @@
             <mat-label>Telefono</mat-label>
             <input formControlName="telefono" matInput placeholder="0000000" />
             <mat-icon matSuffix>phone</mat-icon>
-            @if (form.get('telefono')?.hasError('minlength')) {
-              <mat-error>{{ 'Requiere 10 numeros' }}</mat-error>
-            } @else if (form.get('telefono')?.hasError('maxlength')) {
-              <mat-error>{{ 'Requiere 10 numeros' }}</mat-error>
+            @if (form.get('telefono')?.invalid) {
+              <mat-error>{{ getErrorMessage('telefono') }}</mat-error>
             }
           </mat-form-field>
         </div>
@@ -44,10 +42,8 @@
             <input formControlName="celular" matInput placeholder="0000000000" />
 
             <mat-icon matSuffix>phone_android</mat-icon>
-            @if (form.get('celular')?.hasError('minlength')) {
-              <mat-error>{{ 'Requiere 10 numeros' }}</mat-error>
-            } @else if (form.get('celular')?.hasError('maxlength')) {
-              <mat-error>{{ 'Requiere 10 numeros' }}</mat-error>
+            @if (form.get('celular')?.invalid) {
+              <mat-error>{{ getErrorMessage('celular') }}</mat-error>
             }
           </mat-form-field>
         </div>
@@ -56,8 +52,8 @@
             <mat-label>Email</mat-label>
             <input matInput placeholder="Pr@example.com" formControlName="email" required />
 
-            @if (isValidField('email')) {
-              <mat-error>{{ 'mensaje de error del email' }}</mat-error>
+            @if (form.get('email')?.invalid) {
+              <mat-error>{{ getErrorMessage('email') }}</mat-error>
             }
           </mat-form-field>
         </div>
@@ -66,7 +62,7 @@
             <mat-label>Direccion</mat-label>
             <input formControlName="direccion" matInput placeholder="Calle 1 # 2 - 3" />
             @if (form.get('direccion')?.invalid) {
-              <mat-error>{{ 'Campo Requerido' }}</mat-error>
+              <mat-error>{{ getErrorMessage('direccion') }}</mat-error>
             }
           </mat-form-field>
         </div>
@@ -79,10 +75,10 @@
         Guardar
       </button>
 
-      <!-- <button mat-flat-button>
+      <button mat-flat-button>
         <mat-icon>edit</mat-icon>
         Editar
-      </button> -->
+      </button>
     </mat-card-actions>
   </mat-card>
 </form>

@@ -2,5 +2,9 @@ export interface Impuesto {
   id: number;
   nombre: string;
   porcentaje: number;
-  usuarioModif: string;
+  ImpuestoModif: string;
 }
+
+export interface CreateImpuestoDTO extends Omit<Impuesto, 'id'> {}
+
+export interface UpdateImpuestoDTO extends Partial<CreateImpuestoDTO> {}

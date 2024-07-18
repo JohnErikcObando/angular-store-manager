@@ -4,6 +4,7 @@ import {
   FormControl,
   FormGroup,
   ValidationErrors,
+  ValidatorFn,
 } from '@angular/forms';
 
 @Injectable({
@@ -41,6 +42,14 @@ export class ValidatorsService {
 
       formGroup.get(field2)?.setErrors(null);
       return null;
+    };
+  }
+
+  validateEmail(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      const isValid = emailRegex.test(control.value as string); // Asegúrate de que control.value sea una cadena
+      return isValid ? null : { validateEmail: true };
     };
   }
 }

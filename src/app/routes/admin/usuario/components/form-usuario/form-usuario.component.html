@@ -1,0 +1,109 @@
+<h2 mat-dialog-title>Usuario</h2>
+
+<form [formGroup]="form" (submit)="save()">
+  <mat-dialog-content class="mat-typography">
+    <div class="form-grid">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Usuario</mat-label>
+        <input
+          matInput
+          placeholder="usuario"
+          formControlName="usuario"
+          required
+          [value]="form.get('usuario')?.value | ajustarTexto"
+        />
+        @if (form.get('usuario')?.invalid) {
+          <mat-error>{{ getErrorMessage('usuario') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Password</mat-label>
+        <input formControlName="password" matInput [type]="hide() ? 'password' : 'text'" />
+        <button
+          type="button"
+          mat-icon-button
+          matSuffix
+          (click)="clickEvent($event)"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide()"
+        >
+          <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+
+        @if (form.get('password')?.invalid) {
+          <mat-error>{{ getErrorMessage('password') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Nombre</mat-label>
+        <input
+          formControlName="nombre"
+          matInput
+          placeholder="nombre"
+          [value]="form.get('nombre')?.value | ajustarTexto"
+        />
+        @if (form.get('nombre')?.invalid) {
+          <mat-error>{{ getErrorMessage('nombre') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Apellido</mat-label>
+        <input
+          formControlName="apellido"
+          matInput
+          placeholder="apellido"
+          required
+          [value]="form.get('apellido')?.value | ajustarTexto"
+        />
+        @if (form.get('apellido')?.invalid) {
+          <mat-error>{{ getErrorMessage('apellido') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field" style="grid-column: span 2">
+        <mat-label>Email</mat-label>
+        <input
+          formControlName="email"
+          matInput
+          placeholder="Pr@example.com"
+          required
+          [value]="form.get('email')?.value | ajustarTexto"
+        />
+        @if (form.get('email')?.invalid) {
+          <mat-error>{{ getErrorMessage('email') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Rol de Usuario</mat-label>
+        <mat-select formControlName="rolUsuarioId" required>
+          @for (rolUsuario of rolUsuarios(); track rolUsuario.id) {
+            <mat-option [value]="rolUsuario.id">{{ rolUsuario.nombre }}</mat-option>
+          }
+        </mat-select>
+        @if (form.get('rolUsuarioId')?.invalid) {
+          <mat-error>{{ getErrorMessage('rolUsuarioId') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="activo" required>
+          <mat-option value="true">Activo</mat-option>
+          <mat-option value="false">Inactivo</mat-option>
+        </mat-select>
+        @if (form.get('activo')?.invalid) {
+          <mat-error>{{ getErrorMessage('activo') }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">Cerrar</button>
+    <button mat-button mat-button cdkFocusInitial type="submit">{{ botonAccion() }}</button>
+  </mat-dialog-actions>
+</form>

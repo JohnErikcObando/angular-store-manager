@@ -1,12 +1,16 @@
 export interface Usuario {
-  id:           number;
+  id: number;
   rolUsuarioId: number;
-  usuario:      string;
-  password:     string;
-  nombre:       string;
-  apellido:     string;
-  email:        string;
-  activo:       boolean;
-  fechaNow:     Date;
-  usuarioModif: string;
+  usuario: string;
+  password: string;
+  nombre: string;
+  apellido: string;
+  email: string;
+  activo: boolean;
+  fechaNow?: Date;
+  usuarioModif?: string;
 }
+
+export interface CreateUsuarioDTO extends Omit<Usuario, 'id'> {}
+
+export interface UpdateUsuarioDTO extends Partial<CreateUsuarioDTO> {}

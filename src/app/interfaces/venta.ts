@@ -13,3 +13,7 @@ export interface Venta {
   factura_venta: FacturaVenta;
   producto: Producto;
 }
+
+export interface CreateVentaDTO extends Omit<Venta, 'id'> {}
+
+export interface UpdateVentaDTO extends Partial<CreateVentaDTO> {}
