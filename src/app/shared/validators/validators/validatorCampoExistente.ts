@@ -1,7 +1,9 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { CategoriaService } from 'app/services';
+
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { Observable, of, timer } from 'rxjs';
+
+import { CategoriaService, ClienteService } from 'app/services';
 
 export function ValidatorCampoExistente(categoriaService: CategoriaService): ValidatorFn {
   return (
@@ -15,7 +17,7 @@ export function ValidatorCampoExistente(categoriaService: CategoriaService): Val
 
     return timer(1000).pipe(
       switchMap(() =>
-        categoriaService.findByCategoria(control.value).pipe(
+        categoriaService.findByNombre(control.value).pipe(
           map(response => {
             console.log('resp');
             return response.isAvailable ? null : { CampoExistente: true };

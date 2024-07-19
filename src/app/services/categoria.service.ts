@@ -37,7 +37,7 @@ export class CategoriaService {
     return this.http.delete<Categoria>(`${this.apiUrl}/${id}`);
   }
 
-  findByCategoria(nombre: string): Observable<{ isAvailable: boolean }> {
+  findByNombre(nombre: string): Observable<{ isAvailable: boolean }> {
     return this.http
       .get<Categoria>(`${this.apiUrl}/byCategoria`, {
         params: { nombre },

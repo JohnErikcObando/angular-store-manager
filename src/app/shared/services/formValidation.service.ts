@@ -14,10 +14,8 @@ export class FormValidationService {
       return `Mínimo ${control.errors?.minlength.requiredLength} caracteres`;
     } else if (control?.hasError('maxlength')) {
       return `Mínimo ${control.errors?.maxlength.requiredLength} caracteres`;
-    } else if (control?.hasError('email')) {
+    } else if (control?.hasError('email') || control?.hasError('validateEmail')) {
       return 'Correo electrónico no válido';
-    } else if (control?.hasError('validateEmail')) {
-      return 'Correo electrónico personalizado no válido';
     } else if (control?.hasError('CampoExistente')) {
       return 'El nombre ya existe';
     }

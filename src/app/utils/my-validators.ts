@@ -1,6 +1,6 @@
 import { AbstractControl } from '@angular/forms';
-import { Observable, of } from 'rxjs';
-import { catchError, map, delay } from 'rxjs/operators';
+import { Observable, of, timer } from 'rxjs';
+import { catchError, map, delay, switchMap } from 'rxjs/operators';
 
 import { CategoriaService } from 'app/services';
 
@@ -24,7 +24,12 @@ export class MyValidators {
     console.log('usuario en edición ID', campoDos);
   }
 
-  static ValidarCampoExistente(service: any, methodName: string, fieldName: string) {
+  static ValidarCampoExistente(
+    service: any,
+    methodName: string,
+    fieldName: string,
+    accion: string
+  ) {
     return (control: AbstractControl): Observable<{ [key: string]: any } | null> => {
       console.log(
         'value',
@@ -32,10 +37,12 @@ export class MyValidators {
         'campo',
         MyValidators.campo,
         'campodos',
-        MyValidators.campoDos
+        MyValidators.campoDos,
+        'accion service',
+        accion
       );
 
-      if (MyValidators.estado === 'Editar') {
+      if (accion === 'Editar') {
         if (
           (fieldName === 'nombre' && control.value === MyValidators.campo) ||
           (fieldName === 'id' && control.value === MyValidators.campoDos) ||

@@ -37,7 +37,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   }
 
   private handleError(error: HttpErrorResponse, request: HttpRequest<unknown>) {
-    const urlExclusionList = ['/categoria/byCategoria']; // Agrega los endpoints que deseas excluir
+    const urlExclusionList = ['/categoria/byCategoria', '/cliente/byId']; // Agrega los endpoints que deseas excluir
 
     if (
       error.status === STATUS.NOT_FOUND &&

@@ -26,13 +26,12 @@ import {
 
 // servicios
 import { Sweetalert2Service } from '@shared/services/sweetalert2.service';
-import { UsuarioService } from 'app/services';
+import { RolUsuarioService, UsuarioService } from 'app/services';
 import { ValidatorsService } from '@shared/validators/servicios/validators.service';
 
 // interfaces
 import { DialogData, FormValidationService } from '@shared';
 import { RolUsuario, Usuario } from 'app/interfaces';
-import { RolUsuarioService } from '../../../../../services/rolUsuario.service';
 
 import { AjustarTextoPipe } from '@shared/pipes/ajustar-texto.pipe';
 
@@ -83,13 +82,13 @@ export class FormUsuarioComponent implements OnInit {
   }
 
   readonly form: FormGroup = this.fb.group({
-    rolUsuarioId: ['', Validators.required],
-    usuario: ['', [Validators.required, Validators.minLength(4)]],
-    password: ['', Validators.required],
-    nombre: ['', Validators.required],
+    activo: ['', Validators.required],
     apellido: ['', Validators.required],
     email: ['', [Validators.required, Validators.email, this.validatorsService.validateEmail()]],
-    activo: ['', Validators.required],
+    nombre: ['', Validators.required],
+    password: ['', Validators.required],
+    rolUsuarioId: ['', Validators.required],
+    usuario: ['', [Validators.required, Validators.minLength(4)]],
     usuarioModif: ['MiMascota', Validators.required],
   });
   constructor() {}
