@@ -9,3 +9,6 @@ export interface Compra {
   fechaNow: Date;
   usuarioModif: string;
 }
+
+export interface CreateCompraDTO extends Omit<Compra, 'id'> {}
+export interface UpdateCompraDTO extends Partial<CreateCompraDTO> {}

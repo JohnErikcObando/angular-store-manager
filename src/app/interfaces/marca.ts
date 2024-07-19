@@ -6,5 +6,4 @@ export interface Marca {
 }
 
 export interface CreateMarcaDTO extends Omit<Marca, 'id'> {}
-
 export interface UpdateMarcaDTO extends Partial<CreateMarcaDTO> {}

@@ -6,5 +6,4 @@ export interface Impuesto {
 }
 
 export interface CreateImpuestoDTO extends Omit<Impuesto, 'id'> {}
-
 export interface UpdateImpuestoDTO extends Partial<CreateImpuestoDTO> {}

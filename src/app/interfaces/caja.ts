@@ -6,3 +6,6 @@ export interface Caja {
   tipoFactura: string;
   usuarioModif: string;
 }
+
+export interface CreateCajaDTO extends Omit<Caja, 'id'> {}
+export interface UpdateCajaDTO extends Partial<CreateCajaDTO> {}

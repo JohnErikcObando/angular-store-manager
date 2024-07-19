@@ -16,3 +16,6 @@ export interface FacturaVenta {
   descripcion: string;
   usuarioModif: string;
 }
+
+export interface CreateFacturaVentaDTO extends Omit<FacturaVenta, 'id'> {}
+export interface UpdateFacturaVentaDTO extends Partial<CreateFacturaVentaDTO> {}

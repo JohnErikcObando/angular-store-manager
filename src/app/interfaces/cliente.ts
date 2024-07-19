@@ -8,3 +8,7 @@ export interface Cliente {
   email: string;
   usuarioModif: string;
 }
+
+
+export interface CreateClienteDTO extends Omit<Cliente, 'id'> {}
+export interface UpdateClienteDTO extends Partial<CreateClienteDTO> {}

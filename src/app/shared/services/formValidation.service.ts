@@ -18,7 +18,10 @@ export class FormValidationService {
       return 'Correo electrónico no válido';
     } else if (control?.hasError('validateEmail')) {
       return 'Correo electrónico personalizado no válido';
+    } else if (control?.hasError('CampoExistente')) {
+      return 'El nombre ya existe';
     }
+
     return '';
   }
 }

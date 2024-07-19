@@ -33,10 +33,20 @@ export class ErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler) {
     return next
       .handle(request)
-      .pipe(catchError((error: HttpErrorResponse) => this.handleError(error)));
+      .pipe(catchError((error: HttpErrorResponse) => this.handleError(error, request)));
   }
 
-  private handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse, request: HttpRequest<unknown>) {
+    const urlExclusionList = ['/categoria/byCategoria']; // Agrega los endpoints que deseas excluir
+
+    if (
+      error.status === STATUS.NOT_FOUND &&
+      urlExclusionList.some(url => request.url.includes(url))
+    ) {
+      // No redirigir para ciertos endpoints
+      return throwError(() => error);
+    }
+
     if (this.errorPages.includes(error.status)) {
       this.router.navigateByUrl(`/${error.status}`, {
         skipLocationChange: true,

@@ -4,3 +4,7 @@ export interface Categoria {
   descripcion: string;
   usuarioModif: string;
 }
+
+export interface CreateCategoriaDTO extends Omit<Categoria, 'id'> {}
+
+export interface UpdateCategoriaDTO extends Partial<CreateCategoriaDTO> {}
