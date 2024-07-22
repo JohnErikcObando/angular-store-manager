@@ -19,15 +19,15 @@ export class MarcaService {
     return this.http.post<Marca>(this.apiUrl, dto);
   }
 
-  update(id: number, dto: UpdateMarcaDTO) {
+  update(id: string, dto: UpdateMarcaDTO) {
     return this.http.put<Marca>(`${this.apiUrl}/${id}`, dto);
   }
 
-  patch(id: number, dto: UpdateMarcaDTO) {
+  patch(id: string, dto: UpdateMarcaDTO) {
     return this.http.patch<Marca>(`${this.apiUrl}/${id}/usuariomodif`, dto);
   }
 
-  delete(id: number) {
+  delete(id: string) {
     return this.http.delete<Marca>(`${this.apiUrl}/${id}`);
   }
 
@@ -35,7 +35,7 @@ export class MarcaService {
     return this.http.get<Marca[]>(this.apiUrl);
   }
 
-  get(id: number) {
+  get(id: string) {
     return this.http.get<Marca>(`${this.apiUrl}/${id}`).pipe(
       catchError((error: HttpErrorResponse) => {
         // Manejo de errores

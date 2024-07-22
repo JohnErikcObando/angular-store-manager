@@ -1,1 +1,44 @@
-<p>form-marca works!</p>
+<h2 mat-dialog-title>Marca</h2>
+
+<form [formGroup]="form" (submit)="save()">
+  <mat-dialog-content class="mat-typography">
+    <div class="form-grid">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Nombre</mat-label>
+        <input
+          formControlName="nombre"
+          matInput
+          placeholder="nombre"
+          [value]="form.get('nombre')?.value | ajustarTexto"
+        />
+        @if (form.get('nombre')?.invalid) {
+          <mat-error>{{ getErrorMessage('nombre') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>descripcion</mat-label>
+        <input
+          formControlName="descripcion"
+          matInput
+          placeholder="descripcion"
+          [value]="form.get('descripcion')?.value | ajustarTexto"
+        />
+        @if (form.get('descripcion')?.invalid) {
+          <mat-error>{{ getErrorMessage('descripcion') }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">
+      <mat-icon>closet</mat-icon>
+      Cerrar
+    </button>
+    <button mat-button mat-button cdkFocusInitial type="submit">
+      <mat-icon>save</mat-icon>
+      {{ botonAccion() }}
+    </button>
+  </mat-dialog-actions>
+</form>
