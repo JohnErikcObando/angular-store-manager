@@ -19,15 +19,15 @@ export class ImpuestoService {
     return this.http.post<Impuesto>(this.apiUrl, dto);
   }
 
-  update(id: number, dto: UpdateImpuestoDTO) {
+  update(id: string, dto: UpdateImpuestoDTO) {
     return this.http.put<Impuesto>(`${this.apiUrl}/${id}`, dto);
   }
 
-  patch(id: number, dto: UpdateImpuestoDTO) {
+  patch(id: string, dto: UpdateImpuestoDTO) {
     return this.http.patch<Impuesto>(`${this.apiUrl}/${id}/usuariomodif`, dto);
   }
 
-  delete(id: number) {
+  delete(id: string) {
     return this.http.delete<Impuesto>(`${this.apiUrl}/${id}`);
   }
 
@@ -35,7 +35,7 @@ export class ImpuestoService {
     return this.http.get<Impuesto[]>(this.apiUrl);
   }
 
-  get(id: number) {
+  get(id: string) {
     return this.http.get<Impuesto>(`${this.apiUrl}/${id}`).pipe(
       catchError((error: HttpErrorResponse) => {
         // Manejo de errores

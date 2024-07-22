@@ -1,1 +1,39 @@
-<p>form-impuesto works!</p>
+<h2 mat-dialog-title>Categoria</h2>
+
+<form [formGroup]="form" (submit)="save()">
+  <mat-dialog-content class="mat-typography">
+    <div class="form-grid">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Nombre</mat-label>
+        <input
+          formControlName="nombre"
+          matInput
+          placeholder="nombre"
+          [value]="form.get('nombre')?.value | ajustarTexto"
+        />
+        @if (form.get('nombre')?.invalid) {
+          <mat-error>{{ getErrorMessage('nombre') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Procentaje</mat-label>
+        <input formControlName="porcentaje" matInput placeholder="0" type="number" />
+        @if (form.get('porcentaje')?.invalid) {
+          <mat-error>{{ getErrorMessage('porcentaje') }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">
+      <mat-icon>closet</mat-icon>
+      Cerrar
+    </button>
+    <button mat-button mat-button cdkFocusInitial type="submit">
+      <mat-icon>save</mat-icon>
+      {{ botonAccion() }}
+    </button>
+  </mat-dialog-actions>
+</form>
