@@ -19,15 +19,15 @@ export class ProductoService {
     return this.http.post<Producto>(this.apiUrl, dto);
   }
 
-  update(id: number, dto: UpdateProductoDTO) {
+  update(id: string, dto: UpdateProductoDTO) {
     return this.http.put<Producto>(`${this.apiUrl}/${id}`, dto);
   }
 
-  patch(id: number, dto: UpdateProductoDTO) {
+  patch(id: string, dto: UpdateProductoDTO) {
     return this.http.patch<Producto>(`${this.apiUrl}/${id}/usuariomodif`, dto);
   }
 
-  delete(id: number) {
+  delete(id: string) {
     return this.http.delete<Producto>(`${this.apiUrl}/${id}`);
   }
 
@@ -35,7 +35,7 @@ export class ProductoService {
     return this.http.get<Producto[]>(this.apiUrl);
   }
 
-  get(id: number) {
+  get(id: string) {
     return this.http.get<Producto>(`${this.apiUrl}/${id}`).pipe(
       catchError((error: HttpErrorResponse) => {
         // Manejo de errores

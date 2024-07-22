@@ -1,5 +1,5 @@
-.table-wrapper {
-  max-height: 350px; /* Adjust the height as needed */
+.table-container {
+  max-height: 360px; /* Adjust the height as needed */
   overflow-y: auto;
 }
 
@@ -42,6 +42,10 @@
   display: flex;
   justify-content: flex-end;
   padding: 16px 0;
+}
+
+.right-align {
+  text-align: right;
 }
 
 @media (max-width: 768px) {

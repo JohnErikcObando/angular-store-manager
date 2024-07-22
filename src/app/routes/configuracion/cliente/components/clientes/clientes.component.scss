@@ -1,4 +1,10 @@
 /* Global Styles */
+
+.table-container {
+  max-height: 350px; /* Adjust the height as needed */
+  overflow-y: auto;
+}
+
 .mat-card-header {
   display: flex;
   justify-content: space-between;

@@ -3,13 +3,13 @@ import { Marca } from './marca';
 
 export interface Producto {
   id: number;
-  ProductoId: number;
+  marcaId: number;
   categoriaId: number;
   nombre: string;
   codigo: string;
   descripcion: string;
   valor: number;
-  fechaNow: Date;
+  fechaNow?: Date;
   imagenUrl: string;
   usuarioModif: string;
   marca: Marca;

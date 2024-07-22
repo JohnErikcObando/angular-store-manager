@@ -20,7 +20,7 @@
           <input matInput (keyup)="applyFilter($event)" placeholder="Ej. Nombre" #input />
         </mat-form-field>
 
-        <div class="table-wrapper">
+       <div class="table-container">
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <!-- Columns Definition -->
             <ng-container matColumnDef="nombre">

@@ -20,7 +20,7 @@
           <input matInput (keyup)="applyFilter($event)" placeholder="Ej. Nombre" #input />
         </mat-form-field>
 
-        <div class="table-wrapper">
+        <div class="table-container">
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <!-- Columns Definition -->
             <ng-container matColumnDef="nombre">
@@ -29,8 +29,10 @@
             </ng-container>
 
             <ng-container matColumnDef="porcentaje">
-              <th mat-header-cell *matHeaderCellDef>Porcentaje</th>
-              <td mat-cell *matCellDef="let element">{{ element.porcentaje }} %</td>
+              <th mat-header-cell *matHeaderCellDef class="right-align">Porcentaje</th>
+              <td mat-cell class="right-align" *matCellDef="let element">
+                {{ element.porcentaje }} %
+              </td>
             </ng-container>
 
             <ng-container matColumnDef="accion" stickyEnd>
