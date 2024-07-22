@@ -1,1 +1,25 @@
-<p>form-forma-pagos works!</p>
+<h2 mat-dialog-title>Forma Pago</h2>
+
+<form [formGroup]="form" (submit)="save()">
+  <mat-dialog-content class="mat-typography">
+    <div class="form-grid">
+      <mat-form-field appearance="outline" class="form-field" style="grid-column: span 2">
+        <mat-label>Nombre</mat-label>
+        <input
+          formControlName="nombre"
+          matInput
+          placeholder="nombre"
+          [value]="form.get('nombre')?.value | ajustarTexto"
+        />
+        @if (form.get('nombre')?.invalid) {
+          <mat-error>{{ getErrorMessage('nombre') }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">Cerrar</button>
+    <button mat-button mat-button cdkFocusInitial type="submit">{{ botonAccion() }}</button>
+  </mat-dialog-actions>
+</form>

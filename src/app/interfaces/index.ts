@@ -1,4 +1,4 @@
-export * from './abono-factura';
+export * from './abono-factura-venta';
 export * from './caja';
 export * from './categoria';
 export * from './cliente';
