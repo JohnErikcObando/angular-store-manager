@@ -1,1 +1,101 @@
-<p>form-proveedores works!</p>
+<h2 mat-dialog-title>Usuario</h2>
+
+<form [formGroup]="form" (submit)="save()">
+  <mat-dialog-content class="mat-typography">
+    <div class="form-grid">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Cedula</mat-label>
+        <input
+          matInput
+          placeholder=""
+          formControlName="id"
+          required
+          [value]="form.get('id')?.value | ajustarTexto"
+        />
+        @if (form.get('id')?.invalid) {
+          <mat-error>{{ getErrorMessage('id') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="activo" required>
+          <mat-option value="true">Activo</mat-option>
+          <mat-option value="false">Inactivo</mat-option>
+        </mat-select>
+        @if (form.get('activo')?.invalid) {
+          <mat-error>{{ getErrorMessage('activo') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field" style="grid-column: span 2">
+        <mat-label>Nombre</mat-label>
+        <input
+          formControlName="nombre"
+          matInput
+          placeholder="nombre"
+          [value]="form.get('nombre')?.value | ajustarTexto"
+        />
+        @if (form.get('nombre')?.invalid) {
+          <mat-error>{{ getErrorMessage('nombre') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Telefono</mat-label>
+        <input formControlName="telefono" matInput placeholder="0000000" />
+        <mat-icon matSuffix>phone</mat-icon>
+        @if (form.get('telefono')?.invalid) {
+          <mat-error>{{ getErrorMessage('telefono') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label> Celular</mat-label>
+        <input formControlName="celular" matInput placeholder="0000000" />
+        <mat-icon matSuffix>phone_android</mat-icon>
+        @if (form.get('celular')?.invalid) {
+          <mat-error>{{ getErrorMessage('celular') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field" style="grid-column: span 2">
+        <mat-label>Direccion</mat-label>
+        <input
+          formControlName="direccion"
+          matInput
+          placeholder="direccion"
+          [value]="form.get('direccion')?.value | ajustarTexto"
+        />
+        @if (form.get('direccion')?.invalid) {
+          <mat-error>{{ getErrorMessage('direccion') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field" style="grid-column: span 2">
+        <mat-label>Email</mat-label>
+        <input
+          formControlName="email"
+          matInput
+          placeholder="Pr@example.com"
+          required
+          [value]="form.get('email')?.value | ajustarTexto"
+        />
+        @if (form.get('email')?.invalid) {
+          <mat-error>{{ getErrorMessage('email') }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">
+      <mat-icon>closet</mat-icon>
+      Cerrar
+    </button>
+    <button mat-button mat-button cdkFocusInitial type="submit">
+      <mat-icon>save</mat-icon>
+      {{ botonAccion() }}
+    </button>
+  </mat-dialog-actions>
+</form>

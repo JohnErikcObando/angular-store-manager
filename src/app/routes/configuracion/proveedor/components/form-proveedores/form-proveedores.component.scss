@@ -1,0 +1,12 @@
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.form-field {
+  width: 100%;
+}
+
+.form-field-sm {
+  width: 48%;
+}

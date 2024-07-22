@@ -13,5 +13,6 @@ export * from './menu.service';
 export * from './movimiento.service';
 export * from './producto.service';
 export * from './proveedor.service';
+export * from './proveedor.service';
 export * from './rolUsuario.service';
 export * from './usuario.service';
