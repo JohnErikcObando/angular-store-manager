@@ -24,6 +24,11 @@
           "type": "link"
         },
         {
+          "route": "caja",
+          "name": "caja",
+          "type": "link"
+        },
+        {
           "route": "usuario",
           "name": "usuario",
           "type": "link"

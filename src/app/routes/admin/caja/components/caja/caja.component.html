@@ -1,0 +1,82 @@
+<page-header></page-header>
+
+<div class="row">
+  <div class="col-12">
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <div class="header-title">
+          <mat-card-title>Caja</mat-card-title>
+        </div>
+        <div class="header-button">
+          <button mat-raised-button color="primary" (click)="create()">
+            <mat-icon>add_box</mat-icon> Agregar caja
+          </button>
+        </div>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-form-field class="filter-field">
+          <mat-label>Filter</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ej. Nombre" #input />
+        </mat-form-field>
+
+        <div class="table-container">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <!-- Columns Definition -->
+            <ng-container matColumnDef="nombre">
+              <th mat-header-cell *matHeaderCellDef>Nombre</th>
+              <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="prefijo">
+              <th mat-header-cell *matHeaderCellDef>Prefijo</th>
+              <td mat-cell *matCellDef="let element">{{ element.prefijo }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="numFactura">
+              <th mat-header-cell *matHeaderCellDef>Num Factura</th>
+              <td mat-cell *matCellDef="let element">{{ element.numFactura }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="tipoDocumento">
+              <th mat-header-cell *matHeaderCellDef>Tipo documento</th>
+              <td mat-cell *matCellDef="let element">{{ element.tipoDocumento }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="accion" stickyEnd>
+              <th mat-header-cell *matHeaderCellDef class="center-align">Accion</th>
+              <td mat-cell *matCellDef="let element" class="center-align">
+                <button mat-icon-button (click)="edit(element.id)">
+                  <mat-icon class="mat-primary">edit</mat-icon>
+                </button>
+                <button mat-icon-button (click)="delete(element.id)">
+                  <mat-icon class="mat-warn">delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <!-- Table Rows -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+            <!-- No Data Row -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="3">
+                No hay datos que coincidan con el filtro "{{ input.value }}"
+              </td>
+            </tr>
+          </table>
+        </div>
+      </mat-card-content>
+
+      <mat-card-footer>
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 15]"
+          showFirstLastButtons
+          aria-label="Select page of periodic elements"
+        >
+        </mat-paginator>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>

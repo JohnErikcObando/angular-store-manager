@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './form-factura-compra.component.html',
-  styleUrl: './form-factura-compra.component.scss'
+  styleUrl: './form-factura-compra.component.scss',
 })
-export class FormFacturaCompraComponent {
-
-}
+export class FormFacturaCompraComponent {}

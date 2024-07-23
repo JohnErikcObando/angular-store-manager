@@ -1,0 +1,61 @@
+<h2 mat-dialog-title>Caja</h2>
+
+<form [formGroup]="form" (submit)="save()">
+  <mat-dialog-content class="mat-typography">
+    <div class="form-grid">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Nombre</mat-label>
+        <input
+          formControlName="nombre"
+          matInput
+          placeholder="nombre"
+          [value]="form.get('nombre')?.value | ajustarTexto"
+        />
+        @if (form.get('nombre')?.invalid) {
+          <mat-error>{{ getErrorMessage('nombre') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Num Factura</mat-label>
+        <input formControlName="numFactura" matInput placeholder="0" type="number" />
+        @if (form.get('prefijo')?.invalid) {
+          <mat-error>{{ getErrorMessage('numFactura') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Prefijo</mat-label>
+        <input
+          formControlName="prefijo"
+          matInput
+          placeholder="prefijo"
+          [value]="form.get('prefijo')?.value | ajustarTexto"
+        />
+        @if (form.get('prefijo')?.invalid) {
+          <mat-error>{{ getErrorMessage('prefijo') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Tipo Documento</mat-label>
+        <mat-select formControlName="tipoFactura">
+          <mat-option value="Compra">Compra</mat-option>
+          <mat-option value="Venta">Venta</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('tipoFactura')?.hasError('required')">Campo requerido</mat-error>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">
+      <mat-icon>closet</mat-icon>
+      Cerrar
+    </button>
+    <button mat-button mat-button cdkFocusInitial type="submit">
+      <mat-icon>save</mat-icon>
+      {{ botonAccion() }}
+    </button>
+  </mat-dialog-actions>
+</form>

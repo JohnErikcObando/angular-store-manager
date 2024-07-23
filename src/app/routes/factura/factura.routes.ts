@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
-import { FacturaComprasComponent } from './factura-compra/components/factura-compras/factura-compras.component';
-import { FacturaVentasComponent } from './factura-venta/components/factura-ventas/factura-ventas.component';
+
+import { FormFacturaCompraComponent } from './factura-compra/components/form-factura-compra/form-factura-compra.component';
+import { FormFacturaVentasComponent } from './factura-venta/components/form-factura-ventas/form-factura-ventas.component';
 
 export const routes: Routes = [
   {
     path: 'factura-compra',
-    component: FacturaComprasComponent,
+    component: FormFacturaCompraComponent,
   },
   {
     path: 'factura-venta',
-    component: FacturaVentasComponent,
+    component: FormFacturaVentasComponent,
   },
 ];

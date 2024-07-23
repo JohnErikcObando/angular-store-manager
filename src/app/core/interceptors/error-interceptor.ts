@@ -46,6 +46,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       'proveedor/byId',
       'proveedor/byProveedor',
       'marca/byMarca',
+      'caja/byCaja',
     ]; // Agrega los endpoints que deseas excluir
 
     if (

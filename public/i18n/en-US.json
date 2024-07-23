@@ -9,19 +9,20 @@
     "admin.empresa": "Empresa",
     "admin.dashboard": "Dashboard",
     "admin.usuario": "Usuario",
+    "admin.caja": "Caja",
 
     "configuracion": "Configuracion",
     "configuracion.categoria": "Categoria",
     "configuracion.cliente": "Cliente",
-    "configuracion.forma-pago": "Formapago",
+    "configuracion.forma-pago": "Forma pago",
     "configuracion.impuesto": "Impuesto",
     "configuracion.producto": "Producto",
     "configuracion.proveedor": "Proveedor",
     "configuracion.marca": "Marca",
 
     "factura": "Factura",
-    "factura.factura-compra": "Factura-compra",
-    "factura.factura-venta": "Factura-venta",
+    "factura.factura-compra": "Factura compra",
+    "factura.factura-venta": "Factura venta",
 
     "movimiento": "Movimiento",
 

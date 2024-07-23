@@ -19,15 +19,15 @@ export class CajaService {
     return this.http.post<Caja>(this.apiUrl, dto);
   }
 
-  update(id: number, dto: UpdateCajaDTO) {
+  update(id: string, dto: UpdateCajaDTO) {
     return this.http.put<Caja>(`${this.apiUrl}/${id}`, dto);
   }
 
-  patch(id: number, dto: UpdateCajaDTO) {
+  patch(id: string, dto: UpdateCajaDTO) {
     return this.http.patch<Caja>(`${this.apiUrl}/${id}/usuariomodif`, dto);
   }
 
-  delete(id: number) {
+  delete(id: string) {
     return this.http.delete<Caja>(`${this.apiUrl}/${id}`);
   }
 
@@ -35,7 +35,7 @@ export class CajaService {
     return this.http.get<Caja[]>(this.apiUrl);
   }
 
-  get(id: number) {
+  get(id: string) {
     return this.http.get<Caja>(`${this.apiUrl}/${id}`).pipe(
       catchError((error: HttpErrorResponse) => {
         // Manejo de errores
