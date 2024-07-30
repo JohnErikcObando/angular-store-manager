@@ -1,5 +1,5 @@
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, LOCALE_ID } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter, withComponentInputBinding, withInMemoryScrolling } from '@angular/router';
 
@@ -23,6 +23,10 @@ import { FormlyConfigModule } from './formly-config.module';
 
 import { LoginService } from '@core/authentication/login.service';
 import { FakeLoginService } from './fake-login.service';
+
+import localeEsCO from '@angular/common/locales/es-CO';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeEsCO);
 
 // Required for AOT compilation
 export function TranslateHttpLoaderFactory(http: HttpClient) {
@@ -107,5 +111,9 @@ export const appConfig: ApplicationConfig = {
         popupHeaderDateLabel: 'MMM DD, ddd',
       },
     }),
+    {
+      provide: LOCALE_ID,
+      useValue: 'es-CO',
+    },
   ],
 };
