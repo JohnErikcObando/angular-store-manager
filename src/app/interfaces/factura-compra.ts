@@ -1,3 +1,5 @@
+import { Compra, Proveedor } from 'app/interfaces';
+
 export interface FacturaCompra {
   id: string;
   proveedorId: string;
@@ -16,6 +18,8 @@ export interface FacturaCompra {
   imagenUrl: string;
   descripcion: string;
   usuarioModif: string;
+  Proveedor: Proveedor;
+  detalleCompra: Compra;
 }
 
 export interface CreateFacturaCompraDTO extends Omit<FacturaCompra, 'id'> {}

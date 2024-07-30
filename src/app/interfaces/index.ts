@@ -1,3 +1,4 @@
+export * from './Movimientos-mes';
 export * from './abono-factura-venta';
 export * from './caja';
 export * from './categoria';
@@ -13,9 +14,9 @@ export * from './inventario';
 export * from './marca';
 export * from './menu';
 export * from './movimiento';
-export * from './Movimientos-mes';
 export * from './producto';
 export * from './productos-mas-vendido';
+export * from './proveedor';
 export * from './proveedor';
 export * from './rol-usuario';
 export * from './usuario';

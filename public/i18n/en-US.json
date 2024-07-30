@@ -22,7 +22,9 @@
 
     "factura": "Factura",
     "factura.factura-compra": "Factura compra",
+    "factura.lista-factura-compra": "Lista Factura compra",
     "factura.factura-venta": "Factura venta",
+    "factura.lista-factura-venta": "Lista Factura venta",
 
     "movimiento": "Movimiento",
 

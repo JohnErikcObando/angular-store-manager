@@ -1,0 +1,57 @@
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.form-field {
+  flex: 1;
+  min-width: 200px;
+}
+
+.form-small {
+  width: 5%;
+}
+
+.form-half {
+  width: 10%;
+}
+
+.form-full {
+  width: 40%;
+}
+
+.value-fields .form-field {
+  text-align: right;
+}
+
+.value-fields .mat-form-field {
+  width: 100%; /* Ensure the form field takes full width */
+}
+
+.mat-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.right-align {
+  text-align: right;
+}
+
+img {
+  width: 65%;
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+  }
+}

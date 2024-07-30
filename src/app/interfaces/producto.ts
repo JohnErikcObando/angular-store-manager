@@ -9,6 +9,7 @@ export interface Producto {
   codigo: string;
   descripcion: string;
   valor: number;
+  costo: number;
   fechaNow?: Date;
   imagenUrl: string;
   usuarioModif: string;

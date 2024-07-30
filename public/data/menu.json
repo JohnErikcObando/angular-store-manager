@@ -90,8 +90,18 @@
           "type": "link"
         },
         {
+          "route": "lista-factura-compra",
+          "name": "lista-factura-compra",
+          "type": "link"
+        },
+        {
           "route": "factura-venta",
           "name": "factura-venta",
+          "type": "link"
+        },
+        {
+          "route": "lista-factura-venta",
+          "name": "lista-factura-venta",
           "type": "link"
         }
       ]
