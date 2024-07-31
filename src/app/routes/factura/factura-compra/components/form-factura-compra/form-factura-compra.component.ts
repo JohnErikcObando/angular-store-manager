@@ -98,7 +98,7 @@ export class FormFacturaCompraComponent implements OnInit {
   private sweetalert2Service = inject(Sweetalert2Service);
 
   readonly form: FormGroup = this.fb.group({
-    cajaId: [{ value: '1', disabled: true }, Validators.required],
+    cajaId: [{ value: 1, disabled: true }, Validators.required],
     formaPagoId: [1, Validators.required],
     fecha: [new Date(), Validators.required],
     valor: [0, Validators.required],
@@ -112,7 +112,7 @@ export class FormFacturaCompraComponent implements OnInit {
     imagenUrl: ['', Validators.required],
     usuarioModif: ['Mi Mascota'],
     nombreProducto: [''],
-    nombreProveedor: [''],
+    nombreProveedor: ['', Validators.required],
     proveedorFactura: this.fb.group({
       id: ['', Validators.required],
       nombre: ['', Validators.required],
@@ -136,8 +136,17 @@ export class FormFacturaCompraComponent implements OnInit {
   }
 
   save() {
-    console.log('data', this.form.value);
+    console.log('this.detalleCompra.length', this.detalleCompra.length);
 
+    if (this.form.valid && this.detalleCompra.length > 0) {
+      console.log('ingreso a create');
+      this.create();
+    } else {
+      this.sweetalert2Service.swalQuestion('Por favor ingresar todos los campos obligatorios');
+    }
+  }
+
+  create() {
     this.form.get('cajaId')?.enable();
 
     const data = this.form.value;

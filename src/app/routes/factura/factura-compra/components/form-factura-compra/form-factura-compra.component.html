@@ -19,7 +19,7 @@
 
           <mat-form-field class="form-field">
             <mat-label>Caja</mat-label>
-            <mat-select formControlName="cajaId" [disabled]="true">
+            <mat-select formControlName="cajaId">
               @for (caja of cajas(); track caja.id) {
                 <mat-option [value]="caja.id">{{ caja.nombre }}</mat-option>
               }
@@ -67,7 +67,7 @@
         <h3>Info Proveedor</h3>
 
         <div class="form-row">
-          <mat-form-field class="form-field">
+          <mat-form-field class="form-full">
             <mat-label>Nombre</mat-label>
             <input matInput formControlName="nombreProveedor" [matAutocomplete]="proveedor" />
             <mat-autocomplete
@@ -145,7 +145,7 @@
 
         <h3>Detalle de Compras</h3>
         <div class="form-row">
-          <mat-form-field class="form-field">
+          <mat-form-field class="form-full">
             <mat-label>Nompre Producto</mat-label>
             <input matInput formControlName="nombreProducto" [matAutocomplete]="producto" />
 
@@ -181,7 +181,7 @@
               </mat-form-field>
             }
 
-            <mat-form-field class="form-full">
+            <mat-form-field class="form-half">
               <mat-label>Producto</mat-label>
               <input matInput readonly formControlName="producto" />
               <mat-error *ngIf="compra.get('producto')?.invalid">
@@ -189,7 +189,7 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field class="form-half">
+            <mat-form-field class="form-small">
               <mat-label>Cantidad</mat-label>
               <input matInput formControlName="cantidad" />
               <mat-error *ngIf="compra.get('cantidad')?.invalid">
@@ -197,7 +197,7 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field class="form-half">
+            <mat-form-field class="form-small">
               <mat-label>Costo</mat-label>
               <input matInput formControlName="costo" type="number" class="right-align" />
               <span matTextPrefix>$&nbsp;</span>
@@ -206,7 +206,7 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field class="form-half">
+            <mat-form-field class="form-small">
               <mat-label>Venta</mat-label>
               <input matInput formControlName="venta" type="number" class="right-align" />
               <span matTextPrefix>$&nbsp;</span>
@@ -215,7 +215,7 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field class="form-half">
+            <mat-form-field class="form-small">
               <mat-label>Total</mat-label>
               <input matInput formControlName="total" type="number" class="right-align" />
               <span matTextPrefix>$&nbsp;</span>
@@ -229,7 +229,7 @@
               style="color: red"
               type="button"
               (click)="removeCompra(i)"
-              class="form-small"
+              class="form-buttom"
             >
               <mat-icon>delete_forever</mat-icon>
             </button>
