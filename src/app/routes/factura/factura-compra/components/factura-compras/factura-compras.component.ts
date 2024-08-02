@@ -19,9 +19,9 @@ import { Sweetalert2Service } from '@shared/services/sweetalert2.service';
 import { FacturaCompraService } from 'app/services';
 
 // pipes
+import { CurrencyPipe, DatePipe } from '@angular/common';
 
 import { PageHeaderComponent } from '@shared';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-factura-compras',
@@ -37,6 +37,7 @@ import { DatePipe } from '@angular/common';
     PageHeaderComponent,
     MatCardModule,
     DatePipe,
+    CurrencyPipe,
   ],
   templateUrl: './factura-compras.component.html',
   styleUrl: './factura-compras.component.scss',

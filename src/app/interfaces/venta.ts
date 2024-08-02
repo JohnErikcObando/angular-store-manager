@@ -1,19 +1,27 @@
-import { FacturaVenta } from './factura-venta';
-import { Producto } from './producto';
+import { AbonosFacturaVenta } from './abono-factura-venta';
+import { Caja } from './caja';
+import { Cliente } from './cliente';
+import { FormaPago } from './forma-pago';
 
 export interface Venta {
-  id: number;
-  facturaVentaId: string;
-  productoId: number;
-  cantidad: number;
+  id: string;
+  clienteId: string;
+  cajaId: number;
+  formaPagoId: number;
+  movimientoId: null;
+  fecha: Date;
   valor: number;
+  descuento: number;
+  subtotal: number;
   total: number;
-  fechaNow: Date;
+  abono: number;
+  saldo: number;
+  anulado: boolean;
+  fechaNow?: Date;
+  descripcion: string;
   usuarioModif: string;
-  factura_venta: FacturaVenta;
-  producto: Producto;
+  caja?: Caja;
+  cliente?: Cliente;
+  abonoFacturaCV?: AbonosFacturaVenta[];
+  forma_pago?: FormaPago;
 }
-
-export interface CreateVentaDTO extends Omit<Venta, 'id'> {}
-
-export interface UpdateVentaDTO extends Partial<CreateVentaDTO> {}

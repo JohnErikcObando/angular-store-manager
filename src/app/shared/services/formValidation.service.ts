@@ -17,7 +17,7 @@ export class FormValidationService {
     } else if (control?.hasError('email') || control?.hasError('validateEmail')) {
       return 'Correo electrónico no válido';
     } else if (control?.hasError('CampoExistente')) {
-      return 'El nombre ya existe';
+      return `El dato ya existe.`;
     }
 
     return '';

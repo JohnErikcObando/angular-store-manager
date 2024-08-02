@@ -39,7 +39,9 @@ export class MyValidators {
         'campodos',
         MyValidators.campoDos,
         'accion service',
-        accion
+        accion,
+        'MyValidators.estado',
+        MyValidators.estado
       );
 
       if (accion === 'Editar') {
@@ -50,6 +52,39 @@ export class MyValidators {
         ) {
           return of(null);
         }
+      }
+
+      const value = control.value;
+
+      return service[methodName](value).pipe(
+        map((response: any) => {
+          const isAvailable = response.isAvailable;
+
+          if (!isAvailable) {
+            return { CampoExistente: true };
+          }
+          return null;
+        }),
+        catchError(() => of(null).pipe(delay(0)))
+      );
+    };
+  }
+
+  static ValidarExistente(service: any, methodName: string, fieldName: string) {
+    return (control: AbstractControl): Observable<{ [key: string]: any } | null> => {
+      console.log(
+        'value',
+        control.value,
+        'campo',
+        MyValidators.campo,
+        'campodos',
+        MyValidators.campoDos,
+        'MyValidators.estado',
+        MyValidators.estado
+      );
+
+      if (MyValidators.estado === 'Editar') {
+        return of(null);
       }
 
       const value = control.value;
