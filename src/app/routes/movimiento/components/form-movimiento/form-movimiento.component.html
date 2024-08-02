@@ -1,1 +1,65 @@
-<p>form-movimiento works!</p>
+<h2 mat-dialog-title>Movimiento</h2>
+
+<form [formGroup]="form" (submit)="save()">
+  <mat-dialog-content class="mat-typography">
+    <div class="form-grid">
+      <mat-form-field class="form-field" appearance="outline" style="grid-column: span 2">
+        <mat-label>Fecha</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fecha" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        @if (form.get('fecha')?.invalid) {
+          <mat-error>{{ getErrorMessage('fecha') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Tipo</mat-label>
+        <mat-select formControlName="tipo" required>
+          <mat-option value="Gasto">Gasto</mat-option>
+          <mat-option value="Venta">Venta</mat-option>
+        </mat-select>
+        @if (form.get('tipo')?.invalid) {
+          <mat-error>{{ getErrorMessage('tipo') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Valor</mat-label>
+        <input matInput formControlName="valor" type="number" class="right-align" />
+        <span matTextPrefix>$&nbsp;</span>
+        <mat-error *ngIf="form.get('valor')?.invalid">
+          {{ getErrorMessage('valor') }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field
+        appearance="outline"
+        class="form-field full-width"
+        style="grid-column: span 2"
+      >
+        <mat-label>descripcion</mat-label>
+        <textarea
+          formControlName="descripcion"
+          matInput
+          placeholder="descripcion"
+          [value]="form.get('descripcion')?.value | ajustarTexto"
+        ></textarea>
+        @if (form.get('descripcion')?.invalid) {
+          <mat-error>{{ getErrorMessage('descripcion') }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">
+      <mat-icon>closet</mat-icon>
+      Cerrar
+    </button>
+    <button mat-button mat-button cdkFocusInitial type="submit">
+      <mat-icon>save</mat-icon>
+      {{ botonAccion() }}
+    </button>
+  </mat-dialog-actions>
+</form>

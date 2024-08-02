@@ -19,15 +19,15 @@ export class MovimientoService {
     return this.http.post<Movimiento>(this.apiUrl, dto);
   }
 
-  update(id: number, dto: UpdateMovimientoDTO) {
+  update(id: string, dto: UpdateMovimientoDTO) {
     return this.http.put<Movimiento>(`${this.apiUrl}/${id}`, dto);
   }
 
-  patch(id: number, dto: UpdateMovimientoDTO) {
+  patch(id: string, dto: UpdateMovimientoDTO) {
     return this.http.patch<Movimiento>(`${this.apiUrl}/${id}/usuariomodif`, dto);
   }
 
-  delete(id: number) {
+  delete(id: string) {
     return this.http.delete<Movimiento>(`${this.apiUrl}/${id}`);
   }
 
@@ -35,7 +35,7 @@ export class MovimientoService {
     return this.http.get<Movimiento[]>(this.apiUrl);
   }
 
-  get(id: number) {
+  get(id: string) {
     return this.http.get<Movimiento>(`${this.apiUrl}/${id}`).pipe(
       catchError((error: HttpErrorResponse) => {
         // Manejo de errores
