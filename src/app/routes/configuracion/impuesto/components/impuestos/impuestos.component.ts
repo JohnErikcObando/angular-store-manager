@@ -77,10 +77,10 @@ export class ImpuestosComponent implements OnInit {
   }
 
   delete(id: string) {
-    this.sweetalert2Service.swalDelete('¿Desea eliminar la forma de pago?').subscribe(confirmed => {
+    this.sweetalert2Service.swalDelete('¿Desea eliminar el impuesto?').subscribe(confirmed => {
       if (confirmed) {
         this.impuestoService.delete(id).subscribe(() => {
-          this.sweetalert2Service.swalSuccess('La forma de pago se eliminó correctamente');
+          this.sweetalert2Service.swalSuccess('El impuesto se eliminó correctamente');
 
           this.getAll();
         });

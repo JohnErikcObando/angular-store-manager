@@ -35,6 +35,7 @@ import { AjustarTextoPipe } from '@shared/pipes/ajustar-texto.pipe';
 
 import { DialogData, FormValidationService } from '@shared';
 import { ValidatorCampoExistente } from '@shared/validators/validators/validatorCampoExistente';
+import { MyValidators } from 'app/utils';
 
 @Component({
   selector: 'app-form-categoria',
@@ -78,7 +79,16 @@ export class FormCategoriaComponent implements OnInit {
   }
 
   readonly form: FormGroup = this.fb.group({
-    nombre: ['', [Validators.required], ValidatorCampoExistente(this.categoriaService)],
+    nombre: [
+      '',
+      [Validators.required],
+      MyValidators.ValidarCampoExistente(
+        this.categoriaService,
+        'findByImpuesto',
+        'nombre',
+        this.data.estado
+      ),
+    ],
     descripcion: ['', [Validators.maxLength(500)]],
     usuarioModif: ['MiMascota'],
   });

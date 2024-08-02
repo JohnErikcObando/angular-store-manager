@@ -113,7 +113,7 @@ export class FormCajaComponent implements OnInit {
     const data = this.form.value;
 
     this.cajaService.create(data).subscribe(rta => {
-      this.sweetalert2Service.swalSuccess('La marca se registro Correctamente');
+      this.sweetalert2Service.swalSuccess('La caja se registro Correctamente');
       this.dialogRef.close();
     });
   }
@@ -122,7 +122,7 @@ export class FormCajaComponent implements OnInit {
     const data = this.form.value;
 
     this.cajaService.update(this.cajaId(), data).subscribe(rta => {
-      this.sweetalert2Service.swalSuccess('La marca se edito Correctamente');
+      this.sweetalert2Service.swalSuccess('La caja se edito Correctamente');
       this.dialogRef.close();
     });
   }

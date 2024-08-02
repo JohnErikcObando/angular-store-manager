@@ -124,7 +124,7 @@ export class FormProductosComponent implements OnInit {
     const data = this.form.value;
 
     this.productoService.create(data).subscribe(rta => {
-      this.sweetalert2Service.swalSuccess('El usuario se registro Correctamente');
+      this.sweetalert2Service.swalSuccess('El producto se registro Correctamente');
       this.dialogRef.close();
     });
   }
@@ -133,7 +133,7 @@ export class FormProductosComponent implements OnInit {
     const data = this.form.value;
 
     this.productoService.update(this.productoId(), data).subscribe(rta => {
-      this.sweetalert2Service.swalSuccess('El usuario se edito Correctamente');
+      this.sweetalert2Service.swalSuccess('El producto se edito Correctamente');
       this.dialogRef.close();
     });
   }

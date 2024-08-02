@@ -89,7 +89,7 @@ export class FormClienteComponent implements OnInit {
     telefono: ['', [Validators.maxLength(10), Validators.minLength(10)]],
     celular: ['', [Validators.minLength(10), Validators.maxLength(10)]],
     direccion: [''],
-    email: ['', [Validators.required, Validators.email, this.validatorsService.validateEmail()]],
+    email: ['', [Validators.email, this.validatorsService.validateEmail()]],
     usuarioModif: ['MiMascota'],
   });
   constructor() {}
@@ -114,7 +114,7 @@ export class FormClienteComponent implements OnInit {
     const data = this.form.value;
 
     this.clienteService.create(data).subscribe(rta => {
-      this.sweetalert2Service.swalSuccess('El usuario se registro Correctamente');
+      this.sweetalert2Service.swalSuccess('El cliente se registro Correctamente');
       this.dialogRef.close();
     });
   }
@@ -123,7 +123,7 @@ export class FormClienteComponent implements OnInit {
     const data = this.form.value;
 
     this.clienteService.update(this.clienteId(), data).subscribe(rta => {
-      this.sweetalert2Service.swalSuccess('El usuario se edito Correctamente');
+      this.sweetalert2Service.swalSuccess('El cliente se edito Correctamente');
       this.dialogRef.close();
     });
   }

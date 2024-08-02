@@ -1,8 +1,8 @@
 import { AbstractControl } from '@angular/forms';
-import { Observable, of, timer } from 'rxjs';
-import { catchError, map, delay, switchMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, map, delay } from 'rxjs/operators';
 
-import { CategoriaService } from 'app/services';
+import { UsuarioService } from './../services';
 
 export class MyValidators {
   static estado: string;

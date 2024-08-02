@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Usuario</h2>
+<h2 mat-dialog-title>Cliente</h2>
 
 <form [formGroup]="form" (submit)="save()">
   <mat-dialog-content class="mat-typography">
@@ -81,7 +81,6 @@
           formControlName="email"
           matInput
           placeholder="Pr@example.com"
-          required
           [value]="form.get('email')?.value | ajustarTexto"
         />
         @if (form.get('email')?.invalid) {

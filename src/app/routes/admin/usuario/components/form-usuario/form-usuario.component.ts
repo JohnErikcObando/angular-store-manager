@@ -34,6 +34,7 @@ import { DialogData, FormValidationService } from '@shared';
 import { RolUsuario, Usuario } from 'app/interfaces';
 
 import { AjustarTextoPipe } from '@shared/pipes/ajustar-texto.pipe';
+import { MyValidators } from 'app/utils';
 
 @Component({
   selector: 'app-form-usuario',
@@ -84,7 +85,7 @@ export class FormUsuarioComponent implements OnInit {
   readonly form: FormGroup = this.fb.group({
     activo: ['', Validators.required],
     apellido: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email, this.validatorsService.validateEmail()]],
+    email: ['', [this.validatorsService.validateEmail()]],
     nombre: ['', Validators.required],
     password: ['', Validators.required],
     rolUsuarioId: ['', Validators.required],

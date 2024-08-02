@@ -39,6 +39,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   private handleError(error: HttpErrorResponse, request: HttpRequest<unknown>) {
     const urlExclusionList = [
       '/categoria/byCategoria',
+      '/usuario/byUsuario',
       '/cliente/byId',
       '/formaPago/byFormaPago',
       '/impuesto/byImpuesto',

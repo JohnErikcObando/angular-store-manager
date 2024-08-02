@@ -78,7 +78,6 @@
           formControlName="email"
           matInput
           placeholder="Pr@example.com"
-          required
           [value]="form.get('email')?.value | ajustarTexto"
         />
         @if (form.get('email')?.invalid) {

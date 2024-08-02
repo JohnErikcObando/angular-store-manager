@@ -74,10 +74,10 @@ export class CajaComponent implements OnInit {
   }
 
   delete(id: string) {
-    this.sweetalert2Service.swalDelete('¿Desea eliminar la categoria?').subscribe(confirmed => {
+    this.sweetalert2Service.swalDelete('¿Desea eliminar la caja?').subscribe(confirmed => {
       if (confirmed) {
         this.cajaService.delete(id).subscribe(() => {
-          this.sweetalert2Service.swalSuccess('La categoria se eliminó correctamente');
+          this.sweetalert2Service.swalSuccess('La caja se eliminó correctamente');
 
           this.getAll();
         });

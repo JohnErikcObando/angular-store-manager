@@ -304,7 +304,7 @@ export class FormFacturaCompraComponent implements OnInit {
 
   removeCompra(i: number) {
     this.detalleCompra.removeAt(i);
-    console.log(i);
+    this.actualizarValorFactura();
   }
 
   updateTotal(detalle: FormGroup): void {
@@ -316,12 +316,6 @@ export class FormFacturaCompraComponent implements OnInit {
 
   actualizarValorFactura(): void {
     let totalSum = 0;
-    let totalFactura = 0;
-    let descuento = 0;
-    let abono = 0;
-    let saldo = 0;
-
-    this.form.get('abono')?.setValue(abono, { emitEvent: false });
 
     // Asegúrate de que 'this.detalleCompra' es del tipo FormArray
     (this.detalleCompra.controls as FormGroup[]).forEach((detalle: FormGroup) => {
@@ -329,36 +323,41 @@ export class FormFacturaCompraComponent implements OnInit {
       totalSum += total;
     });
 
-    descuento = this.form.get('descuento')?.value || 0;
-    abono = this.form.get('abono')?.value || 0;
-
-    if (descuento <= totalSum) {
-      totalFactura = totalSum - descuento;
-    } else {
-      totalFactura = totalSum;
-      descuento = 0;
-    }
-
-    if (abono <= totalFactura && abono > 0) {
-      saldo = totalFactura - abono;
-      console.log('if');
-    } else {
-      console.log('else');
-      saldo = totalFactura;
-      abono = totalFactura;
-    }
-
     // Actualizar el campo 'valor' con la suma total
     this.form.get('valor')?.setValue(totalSum, { emitEvent: false });
-    this.form.get('total')?.setValue(totalFactura, { emitEvent: false });
-    this.form.get('descuento')?.setValue(descuento, { emitEvent: false });
-    this.form.get('abono')?.setValue(abono, { emitEvent: false });
-    this.form.get('saldo')?.setValue(saldo, { emitEvent: false });
+    this.form.get('abono')?.setValue(totalSum, { emitEvent: false });
+    this.form.get('total')?.setValue(totalSum);
+
+    this.onactualizarValor();
   }
 
   onactualizarValor() {
-    console.log('Input field lost focus');
-    this.actualizarValorFactura();
+    const totalFactura = 0;
+    let saldo = this.form.get('saldo')?.value || 0;
+    let abono = this.form.get('abono')?.value || 0;
+    let total = this.form.get('valor')?.value || 0;
+    let descuento = this.form.get('descuento')?.value || 0;
+
+    console.log('saldo', saldo, 'abono', abono, 'total', total, 'descuento', descuento);
+
+    if (descuento <= total && descuento > 0) {
+      total = total - descuento;
+      if (abono > total) {
+        abono = total;
+      }
+    } else {
+      descuento = 0;
+    }
+
+    console.log('total', total);
+
+    if (abono > 0 && abono <= total) {
+      saldo = total - abono;
+    }
+
+    this.form.get('saldo')?.setValue(saldo);
+    this.form.get('total')?.setValue(total);
+    this.form.get('abono')?.setValue(abono);
   }
 
   getErrorMessage(controlName: string): string {

@@ -97,7 +97,7 @@ export class FormProveedoresComponent implements OnInit {
     telefono: ['', [Validators.maxLength(10), Validators.minLength(10)]],
     celular: ['', [Validators.minLength(10), Validators.maxLength(10)]],
     direccion: [''],
-    email: ['', [Validators.required, Validators.email, this.validatorsService.validateEmail()]],
+    email: ['', [Validators.email, this.validatorsService.validateEmail()]],
     activo: ['', [Validators.required]],
     usuarioModif: ['MiMascota'],
   });

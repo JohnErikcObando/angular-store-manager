@@ -74,10 +74,10 @@ export class MarcaComponent implements OnInit {
   }
 
   delete(id: string) {
-    this.sweetalert2Service.swalDelete('¿Desea eliminar la categoria?').subscribe(confirmed => {
+    this.sweetalert2Service.swalDelete('¿Desea eliminar la marca?').subscribe(confirmed => {
       if (confirmed) {
         this.marcaService.delete(id).subscribe(() => {
-          this.sweetalert2Service.swalSuccess('La categoria se eliminó correctamente');
+          this.sweetalert2Service.swalSuccess('La marca se eliminó correctamente');
 
           this.getAll();
         });

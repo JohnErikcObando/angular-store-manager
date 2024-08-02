@@ -76,10 +76,10 @@ export class ProveedoresComponent implements OnInit {
   }
 
   delete(id: string) {
-    this.sweetalert2Service.swalDelete('¿Desea eliminar el cliente?').subscribe(confirmed => {
+    this.sweetalert2Service.swalDelete('¿Desea eliminar el proveedor?').subscribe(confirmed => {
       if (confirmed) {
         this.proveedorService.delete(id).subscribe(() => {
-          this.sweetalert2Service.swalSuccess('El cliente se eliminó correctamente');
+          this.sweetalert2Service.swalSuccess('El proveedor se eliminó correctamente');
 
           this.getAll();
         });

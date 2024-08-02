@@ -11,7 +11,7 @@
         <div class="col-sm-6">
           <mat-form-field class="medium-width">
             <mat-label>Nit</mat-label>
-            <input formControlName="id" matInput placeholder="Nit" />
+            <input formControlName="id" matInput placeholder="Nit" readonly />
             @if (form.get('id')?.invalid) {
               <mat-error>{{ getErrorMessage('id') }}</mat-error>
             }
@@ -73,11 +73,6 @@
       <button [disabled]="form.invalid" mat-flat-button type="submit">
         <mat-icon>save</mat-icon>
         Guardar
-      </button>
-
-      <button mat-flat-button>
-        <mat-icon>edit</mat-icon>
-        Editar
       </button>
     </mat-card-actions>
   </mat-card>

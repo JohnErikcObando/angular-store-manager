@@ -48,10 +48,11 @@ export class ValidatorsService {
   validateEmail(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       if (!control.value) {
+        // Permitir vacío
         return null;
       }
       const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-      const isValid = emailRegex.test(control.value as string); // Asegúrate de que control.value sea una cadena
+      const isValid = emailRegex.test(control.value as string);
       return isValid ? null : { validateEmail: true };
     };
   }

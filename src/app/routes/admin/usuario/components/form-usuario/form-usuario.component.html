@@ -6,11 +6,10 @@
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Usuario</mat-label>
         <input
+          formControlName="usuario"
           matInput
           placeholder="usuario"
-          formControlName="usuario"
-          required
-          [value]="form.get('usuario')?.value | ajustarTexto"
+
         />
         @if (form.get('usuario')?.invalid) {
           <mat-error>{{ getErrorMessage('usuario') }}</mat-error>
@@ -69,7 +68,6 @@
           formControlName="email"
           matInput
           placeholder="Pr@example.com"
-          required
           [value]="form.get('email')?.value | ajustarTexto"
         />
         @if (form.get('email')?.invalid) {
