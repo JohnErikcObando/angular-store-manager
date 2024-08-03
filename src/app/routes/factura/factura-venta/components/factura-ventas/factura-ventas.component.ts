@@ -76,8 +76,6 @@ export class FacturaVentasComponent implements OnInit {
     this.facturaVentaService.getAll().subscribe({
       next: data => {
         this.facturaVenta.set(data);
-        console.log(this.facturaVenta());
-
         this.dataSource = new MatTableDataSource<FacturaVenta>(data);
         this.dataSource.paginator = this.paginator;
       },

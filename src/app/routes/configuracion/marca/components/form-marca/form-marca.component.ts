@@ -139,11 +139,8 @@ export class FormMarcaComponent implements OnInit {
     if (this.data.id != '') {
       this.botonAccion.set('Editar');
       this.marcaId.set(this.data.id);
-      console.log('editar', this.marcaId());
-
-      this.get(this.marcaId());
+     this.get(this.marcaId());
     } else {
-      console.log(this.data);
       this.botonAccion.set('Guardar');
       this.marcaId.set('');
     }

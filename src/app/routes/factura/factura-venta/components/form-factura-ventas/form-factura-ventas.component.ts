@@ -144,15 +144,7 @@ export class FormFacturaVentasComponent implements OnInit {
   }
 
   save() {
-    console.log(
-      'this.detalleVenta.length',
-      this.detalleVenta.length,
-      'this.form.valid',
-      this.form.valid
-    );
-
     if (this.form.valid && this.detalleVenta.length > 0) {
-      console.log('ingreso a create');
       this.create();
     } else {
       this.sweetalert2Service.swalQuestion('Por favor ingresar todos los campos obligatorios');
@@ -352,8 +344,6 @@ export class FormFacturaVentasComponent implements OnInit {
     let total = this.form.get('valor')?.value || 0;
     let descuento = this.form.get('descuento')?.value || 0;
 
-    console.log('saldo', saldo, 'abono', abono, 'total', total, 'descuento', descuento);
-
     if (descuento <= total && descuento > 0) {
       total = total - descuento;
       if (abono > total) {
@@ -362,8 +352,6 @@ export class FormFacturaVentasComponent implements OnInit {
     } else {
       descuento = 0;
     }
-
-    console.log('total', total);
 
     if (abono > 0 && abono <= total) {
       saldo = total - abono;
@@ -385,7 +373,6 @@ export class FormFacturaVentasComponent implements OnInit {
       this.addCliente.set('Crear Cliente');
       MyValidators.setEstado('Editar');
     }
-    console.log('this.estado()', MyValidators.setEstado);
   }
 
   getErrorMessage(controlName: string): string {

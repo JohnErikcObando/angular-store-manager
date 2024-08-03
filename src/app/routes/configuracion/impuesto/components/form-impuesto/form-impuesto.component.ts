@@ -107,7 +107,6 @@ export class FormImpuestoComponent implements OnInit {
 
   create() {
     const data = this.form.value;
-    console.log(data);
 
     this.impuestoService.create(data).subscribe(rta => {
       this.sweetalert2Service.swalSuccess('El impuesto se registro Correctamente');
@@ -139,11 +138,8 @@ export class FormImpuestoComponent implements OnInit {
     if (this.data.id != '') {
       this.botonAccion.set('Editar');
       this.impuestoId.set(this.data.id);
-      console.log('editar', this.impuestoId());
-
       this.get(this.impuestoId());
     } else {
-      console.log(this.data);
       this.botonAccion.set('Guardar');
       this.impuestoId.set('');
     }

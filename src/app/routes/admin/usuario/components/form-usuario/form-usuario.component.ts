@@ -150,11 +150,9 @@ export class FormUsuarioComponent implements OnInit {
     if (this.data.id != '') {
       this.botonAccion.set('Editar');
       this.usuarioId.set(this.data.id);
-      console.log('editar', this.usuarioId());
 
       this.get(this.usuarioId());
     } else {
-      console.log(this.data);
       this.botonAccion.set('Guardar');
       this.usuarioId.set('');
     }

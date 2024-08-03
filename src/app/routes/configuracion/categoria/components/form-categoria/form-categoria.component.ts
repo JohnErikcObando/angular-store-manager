@@ -144,11 +144,9 @@ export class FormCategoriaComponent implements OnInit {
     if (this.data.id != '') {
       this.botonAccion.set('Editar');
       this.categoriaId.set(this.data.id);
-      console.log('editar', this.categoriaId());
 
       this.get(this.categoriaId());
     } else {
-      console.log(this.data);
       this.botonAccion.set('Guardar');
       this.categoriaId.set('');
     }

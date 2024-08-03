@@ -142,11 +142,9 @@ export class FormCajaComponent implements OnInit {
     if (this.data.id != '') {
       this.botonAccion.set('Editar');
       this.cajaId.set(this.data.id);
-      console.log('editar', this.cajaId());
 
       this.get(this.cajaId());
     } else {
-      console.log(this.data);
       this.botonAccion.set('Guardar');
       this.cajaId.set('');
     }

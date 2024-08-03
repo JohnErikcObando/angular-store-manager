@@ -54,7 +54,6 @@ export class ProveedorService {
   }
 
   findByProveedor(nombre: string) {
-    console.log('ingreso a consultar por nombre');
     return this.http
       .get<Proveedor>(`${this.apiUrl}/byProveedor`, {
         params: { nombre },
@@ -72,8 +71,6 @@ export class ProveedorService {
   }
 
   findById(id: string) {
-    console.log('ingreso a consultar por id');
-
     return this.http
       .get<Proveedor>(`${this.apiUrl}/byId`, {
         params: { id },

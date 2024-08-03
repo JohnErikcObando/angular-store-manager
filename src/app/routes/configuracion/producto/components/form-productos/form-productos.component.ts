@@ -153,11 +153,8 @@ export class FormProductosComponent implements OnInit {
     if (this.data.id != '') {
       this.botonAccion.set('Editar');
       this.productoId.set(this.data.id);
-      console.log('editar', this.productoId());
-
       this.get(this.productoId());
     } else {
-      console.log(this.data);
       this.botonAccion.set('Guardar');
       this.productoId.set('');
     }

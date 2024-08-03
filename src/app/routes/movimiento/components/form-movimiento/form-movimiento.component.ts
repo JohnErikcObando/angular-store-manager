@@ -136,11 +136,8 @@ export class FormMovimientoComponent implements OnInit {
     if (this.data.id != '') {
       this.botonAccion.set('Editar');
       this.moviminetoId.set(this.data.id);
-      console.log('editar', this.moviminetoId());
-
       this.get(this.moviminetoId());
     } else {
-      console.log(this.data);
       this.botonAccion.set('Guardar');
       this.moviminetoId.set('');
     }

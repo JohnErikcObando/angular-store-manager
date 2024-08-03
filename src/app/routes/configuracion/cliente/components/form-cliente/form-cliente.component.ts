@@ -143,11 +143,8 @@ export class FormClienteComponent implements OnInit {
     if (this.data.id != '') {
       this.botonAccion.set('Editar');
       this.clienteId.set(this.data.id);
-      console.log('editar', this.clienteId());
-
       this.get(this.clienteId());
     } else {
-      console.log(this.data);
       this.botonAccion.set('Guardar');
       this.clienteId.set('');
     }

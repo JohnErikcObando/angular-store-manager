@@ -50,8 +50,6 @@ export class LineChartsComponent implements OnInit {
       const meses = this.ventasMes.map(venta => venta.mes);
       const montos = this.ventasMes.map(venta => venta.total);
 
-      console.log('ventas por mes  meses', meses, 'valor', montos);
-
       new Chart(ctx, {
         type: 'line',
         data: {

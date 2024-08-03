@@ -40,8 +40,6 @@ export class PageHeaderComponent implements OnInit {
     }
 
     this.title = this.title || this.nav[this.nav.length - 1];
-
-    console.log('headerpages ', this.hideBreadcrumb);
   }
 
   genBreadcrumb() {

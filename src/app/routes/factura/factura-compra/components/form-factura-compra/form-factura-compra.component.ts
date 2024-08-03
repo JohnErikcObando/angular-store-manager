@@ -136,10 +136,7 @@ export class FormFacturaCompraComponent implements OnInit {
   }
 
   save() {
-    console.log('this.detalleCompra.length', this.detalleCompra.length);
-
     if (this.form.valid && this.detalleCompra.length > 0) {
-      console.log('ingreso a create');
       this.create();
     } else {
       this.sweetalert2Service.swalQuestion('Por favor ingresar todos los campos obligatorios');
@@ -338,8 +335,6 @@ export class FormFacturaCompraComponent implements OnInit {
     let total = this.form.get('valor')?.value || 0;
     let descuento = this.form.get('descuento')?.value || 0;
 
-    console.log('saldo', saldo, 'abono', abono, 'total', total, 'descuento', descuento);
-
     if (descuento <= total && descuento > 0) {
       total = total - descuento;
       if (abono > total) {
@@ -348,8 +343,6 @@ export class FormFacturaCompraComponent implements OnInit {
     } else {
       descuento = 0;
     }
-
-    console.log('total', total);
 
     if (abono > 0 && abono <= total) {
       saldo = total - abono;

@@ -13,13 +13,10 @@ export function ValidatorCampoExistente(categoriaService: CategoriaService): Val
       return of(null);
     }
 
-    console.log('ingreso');
-
     return timer(1000).pipe(
       switchMap(() =>
         categoriaService.findByNombre(control.value).pipe(
           map(response => {
-            console.log('resp');
             return response.isAvailable ? null : { CampoExistente: true };
           }),
           catchError(() => of(null))

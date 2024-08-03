@@ -9,6 +9,7 @@ export * from './factura-venta.service';
 export * from './forma-pago.service';
 export * from './forma-pago.service';
 export * from './impuesto.service';
+export * from './inventario.service';
 export * from './marca.service';
 export * from './menu.service';
 export * from './movimiento.service';

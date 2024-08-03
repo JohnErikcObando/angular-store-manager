@@ -24,3 +24,4 @@ export * from './venta';
 export * from './ventas-por-dia';
 export * from './ventas-por-mes';
 export * from './ventas-por-semana';
+export * from './inventario';

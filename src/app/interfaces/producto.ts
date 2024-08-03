@@ -13,8 +13,8 @@ export interface Producto {
   fechaNow?: Date;
   imagenUrl: string;
   usuarioModif: string;
-  marca: Marca;
-  categoria: Categoria;
+  marca?: Marca;
+  categoria?: Categoria;
 }
 
 export interface CreateProductoDTO extends Omit<Producto, 'id'> {}

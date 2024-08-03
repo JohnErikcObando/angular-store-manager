@@ -16,12 +16,10 @@ export class MyValidators {
 
   static setCampo(campo: string) {
     MyValidators.campo = campo;
-    console.log('usuario en edición ID', campo);
   }
 
   static setCampoDos(campoDos: string) {
     MyValidators.campoDos = campoDos;
-    console.log('usuario en edición ID', campoDos);
   }
 
   static ValidarCampoExistente(

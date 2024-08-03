@@ -73,8 +73,6 @@ export class FacturaComprasComponent implements OnInit {
     this.facturaCompraService.getAll().subscribe({
       next: data => {
         this.facturaCompra.set(data);
-        console.log(this.facturaCompra());
-
         this.dataSource = new MatTableDataSource<FacturaCompra>(data);
         this.dataSource.paginator = this.paginator;
       },

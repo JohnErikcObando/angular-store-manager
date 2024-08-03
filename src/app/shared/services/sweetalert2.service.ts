@@ -13,7 +13,6 @@ export class Sweetalert2Service {
 
   get deleteConfirmation(): Signal<boolean> {
     return this.delecteConfirm;
-    console.log('this.delecteConfirm', this.delecteConfirm);
   }
 
   swalSuccess(message: string) {

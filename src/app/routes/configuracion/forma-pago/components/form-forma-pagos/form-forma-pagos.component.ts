@@ -136,11 +136,8 @@ export class FormFormaPagosComponent implements OnInit {
     if (this.data.id != '') {
       this.botonAccion.set('Editar');
       this.formaPagoId.set(this.data.id);
-      console.log('editar', this.formaPagoId());
-
       this.get(this.formaPagoId());
     } else {
-      console.log(this.data);
       this.botonAccion.set('Guardar');
       this.formaPagoId.set('');
     }

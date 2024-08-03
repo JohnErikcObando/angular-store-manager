@@ -152,11 +152,8 @@ export class FormProveedoresComponent implements OnInit {
     if (this.data.id != '') {
       this.botonAccion.set('Editar');
       this.proveedorId.set(this.data.id);
-      console.log('editar', this.proveedorId());
-
       this.get(this.proveedorId());
     } else {
-      console.log(this.data);
       this.botonAccion.set('Guardar');
       this.proveedorId.set('');
     }
