@@ -1,0 +1,92 @@
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.form-field {
+  flex: 1;
+  min-width: 150px; /* Aumenta el ancho mínimo para campos más grandes */
+}
+
+.form-field-large {
+  flex: 1 1 100%; /* Hace que el campo ocupe toda la fila en pantallas más pequeñas */
+}
+
+.right-align {
+  text-align: right;
+}
+
+.table-container {
+  margin: 16px; /* Esto establece el margen en 10px en todos los lados (top, right, bottom, left) */
+}
+
+.mat-dialog-title {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.table-container {
+  max-height: 250px; /* Adjust the height as needed */
+  overflow-y: auto;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.mat-table {
+  width: 100%;
+  // min-width: 600px; /* Adjust this based on your column count */
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: #0074e9;
+}
+
+th {
+  font-weight: bold;
+  background-color: #e0e0e0; /* Color de fondo */
+  color: #0074e9;
+  font-size: 17px;
+}
+
+.mat-header-cell,
+.mat-cell {
+  padding: 16px;
+}
+
+.mat-card-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px 0;
+}
+
+.green-icon {
+  color: #4caf50; /* Verde estándar Material Design */
+}
+
+.saldo-container {
+  display: flex;
+  text-align: right;
+  font-size: 1.2em;
+  color: RED;
+  margin: 20px;
+}

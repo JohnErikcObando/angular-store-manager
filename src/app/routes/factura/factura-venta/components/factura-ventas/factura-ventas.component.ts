@@ -12,16 +12,16 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
 // interfaces
-import { Cliente, FacturaVenta, Venta } from 'app/interfaces';
+import { FacturaVenta, Venta } from 'app/interfaces';
 
 // services
-import { Sweetalert2Service } from '@shared/services/sweetalert2.service';
 import { FacturaVentaService } from 'app/services';
 
 // pipes
 import { CurrencyPipe, DatePipe } from '@angular/common';
 
 import { PageHeaderComponent } from '@shared';
+import { FormAbonoComponent } from 'app/routes/factura/form-abono/form-abono.component';
 
 @Component({
   selector: 'app-factura-ventas',
@@ -38,6 +38,7 @@ import { PageHeaderComponent } from '@shared';
     MatCardModule,
     DatePipe,
     CurrencyPipe,
+    FormAbonoComponent,
   ],
   templateUrl: './factura-ventas.component.html',
   styleUrl: './factura-ventas.component.scss',
@@ -61,12 +62,15 @@ export class FacturaVentasComponent implements OnInit {
   dataSource = new MatTableDataSource<FacturaVenta>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  readonly estado = signal('');
+  readonly estado = signal('Guardar');
   readonly proveedorId = signal('');
   readonly dialog = inject(MatDialog);
 
   private facturaVentaService = inject(FacturaVentaService);
-  private sweetalert2Service = inject(Sweetalert2Service);
+
+  resultsLength = 0;
+  isLoadingResults = true;
+  isRateLimitReached = false;
 
   ngOnInit(): void {
     this.getAll();
@@ -85,5 +89,25 @@ export class FacturaVentasComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  openDialog(id: string): void {
+    console.log('este es el id', id);
+
+    const dialogRef = this.dialog.open(FormAbonoComponent, {
+      data: { id },
+      disableClose: true,
+      width: '70vw', // Ajusta el ancho del diálogo
+      height: '90vh', // Ajusta el alto del diálogo
+      maxWidth: '70vw', // Máximo ancho del diálogo
+      maxHeight: '90vh', // Máximo alto del diálogo
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.estado.set(result);
+      }
+      this.getAll();
+    });
   }
 }

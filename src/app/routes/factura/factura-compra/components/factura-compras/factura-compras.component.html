@@ -50,7 +50,7 @@
             </ng-container>
 
             <ng-container matColumnDef="total">
-              <th mat-header-cell *matHeaderCellDef>Total</th>
+              <th mat-header-cell *matHeaderCellDef class="right-align">Total</th>
               <td mat-cell class="right-align" *matCellDef="let element">
                 {{ element.total | currency: 'COP' : 'symbol' : '1.0-0' }}
               </td>

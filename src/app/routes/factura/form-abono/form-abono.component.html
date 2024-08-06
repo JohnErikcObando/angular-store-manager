@@ -1,1 +1,137 @@
-<p>form-abono works!</p>
+<h2 mat-dialog-title>Producto</h2>
+
+<form [formGroup]="form" (submit)="save()">
+  <mat-dialog-content class="mat-typography">
+    <div class="form-group">
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Factura</mat-label>
+          <input
+            formControlName="facturaVentaId"
+            matInput
+            placeholder="Factura Venta ID"
+            readonly="true"
+            [value]="form.get('facturaVentaId')?.value | ajustarTexto"
+          />
+          <mat-error *ngIf="form.get('facturaVentaId')?.invalid">
+            {{ getErrorMessage('facturaVentaId') }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Fecha</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="fecha" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="form.get('fecha')?.invalid">
+            {{ getErrorMessage('fecha') }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Forma de Pago</mat-label>
+          <mat-select formControlName="formaPagoId">
+            <mat-option *ngFor="let formapago of formaPagos()" [value]="formapago.id">
+              {{ formapago.nombre }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('formaPagoId')?.invalid">
+            {{ getErrorMessage('formaPagoId') }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Valor</mat-label>
+          <input
+            formControlName="valor"
+            matInput
+            placeholder="0.000"
+            type="number"
+            class="right-align"
+            (blur)="onactualizarValor()"
+          />
+          <span matTextPrefix>$&nbsp;</span>
+          <mat-error *ngIf="form.get('valor')?.invalid">
+            {{ getErrorMessage('valor') }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline" class="form-field form-field-large">
+        <mat-label>Descripción</mat-label>
+        <textarea
+          formControlName="descripcion"
+          matInput
+          placeholder="Descripción"
+          [value]="form.get('descripcion')?.value | ajustarTexto"
+        ></textarea>
+        <mat-error *ngIf="form.get('descripcion')?.invalid">
+          {{ getErrorMessage('descripcion') }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <div class="saldo-container">
+      <div class="saldo-value">
+        Saldo: {{ this.saldo() | currency: 'COP' : 'symbol' : '1.0-0' }}
+      </div>
+    </div>
+
+    <button mat-button mat-dialog-close type="button">
+      <mat-icon>close</mat-icon>
+      Cerrar
+    </button>
+    <button mat-button cdkFocusInitial type="submit">
+      <mat-icon>save</mat-icon>
+      {{ botonAccion() }}
+    </button>
+  </mat-dialog-actions>
+
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="anulado">
+        <th mat-header-cell *matHeaderCellDef class="right-align"></th>
+        <td mat-cell class="right-align" *matCellDef="let element">
+          @if (element.anulado === false) {
+            <mat-icon class="green-icon">check_circle</mat-icon>
+          } @else {
+            <mat-icon class="mat-warn">cancel</mat-icon>
+          }
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="fecha">
+        <th mat-header-cell *matHeaderCellDef>Fecha</th>
+        <td mat-cell *matCellDef="let element">{{ element.fecha | date: 'longDate' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="recibo">
+        <th mat-header-cell *matHeaderCellDef>Recibo</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="formaPago">
+        <th mat-header-cell *matHeaderCellDef>Forma Pago</th>
+        <td mat-cell *matCellDef="let element">{{ element.forma_pago.nombre }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="descripcion">
+        <th mat-header-cell *matHeaderCellDef>Descripción</th>
+        <td mat-cell *matCellDef="let element">{{ element.descripcion }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="valor">
+        <th mat-header-cell *matHeaderCellDef class="right-align">Valor</th>
+        <td mat-cell class="right-align" *matCellDef="let element">
+          {{ element.valor | currency: 'COP' : 'symbol' : '1.0-0' }}
+        </td>
+      </ng-container>
+
+      <!-- Table Rows -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</form>

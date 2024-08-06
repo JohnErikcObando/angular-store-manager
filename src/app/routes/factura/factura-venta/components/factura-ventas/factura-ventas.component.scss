@@ -1,7 +1,7 @@
 /* Global Styles */
 
 .table-container {
-  max-height: 350px; /* Adjust the height as needed */
+  max-height: 250px; /* Adjust the height as needed */
   overflow-y: auto;
 }
 
@@ -32,7 +32,7 @@
 
 .mat-table {
   width: 100%;
-  min-width: 600px; /* Adjust this based on your column count */
+  // min-width: 300px; /* Adjust this based on your column count */
 }
 
 .mat-header-cell,
@@ -68,6 +68,7 @@ th {
   font-weight: bold;
   background-color: #e0e0e0; /* Color de fondo */
   color: #0074e9;
+  font-size: 17px;
 }
 
 @media (max-width: 768px) {
