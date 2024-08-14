@@ -89,7 +89,7 @@ export class FormAbonoComponent implements OnInit {
   botonAccion = signal('');
   bottonAccion = signal('Guardar');
   facturaId = signal('');
-  saldo = signal('');
+  saldo = signal<number>(0);
 
   readonly form: FormGroup = this.fb.group({
     facturaVentaId: ['', Validators.required],
@@ -127,7 +127,7 @@ export class FormAbonoComponent implements OnInit {
     const data = this.form.value;
 
     this.abonosFacturaVentaService.create(data).subscribe(rta => {
-      this.sweetalert2Service.swalSuccess('El producto se registro Correctamente');
+      this.sweetalert2Service.swalSuccess('El abono se registro Correctamente');
       this.dialogRef.close();
     });
   }
@@ -182,7 +182,6 @@ export class FormAbonoComponent implements OnInit {
         this.saldo.set(facturaVenta.saldo); // Actualiza la señal con el saldo
       }
 
-      console.log('data', this.abonos());
       this.dataSource = new MatTableDataSource<AbonosFacturaVenta>(this.abonos());
       this.dataSource.paginator = this.paginator;
     });
@@ -190,12 +189,17 @@ export class FormAbonoComponent implements OnInit {
 
   onactualizarValor() {
     const valor = this.form.get('valor')?.value;
+    const saldo = this.saldo(); // Guarda el saldo en una variable para depuración
 
-    console.log('valor', valor, 'abono', this.saldo());
+    if (saldo === 0) {
+      this.sweetalert2Service.swalQuestion('La factura ya está cancelada');
+      this.form.get('valor')?.setValue('');
+      return; // Salir de la función si el saldo es 0
+    }
 
-    if (valor > this.saldo() || valor <= 0) {
+    if (valor > saldo || valor <= 0) {
       this.sweetalert2Service.swalQuestion(
-        'El valor no puedes ser mayor al saldo o menor igual a 0'
+        'El valor no puede ser mayor al saldo o menor igual a 0'
       );
       this.form.get('valor')?.setValue('');
     }

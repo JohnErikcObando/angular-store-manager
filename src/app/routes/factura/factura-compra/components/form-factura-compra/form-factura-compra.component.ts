@@ -165,6 +165,7 @@ export class FormFacturaCompraComponent implements OnInit {
 
     this.imagenUrl.set('');
     this.form.reset();
+    this.detalleCompra.clear();
   }
 
   getAllProveedores() {
@@ -320,10 +321,11 @@ export class FormFacturaCompraComponent implements OnInit {
       totalSum += total;
     });
 
-    // Actualizar el campo 'valor' con la suma total
-    this.form.get('valor')?.setValue(totalSum, { emitEvent: false });
-    this.form.get('abono')?.setValue(totalSum, { emitEvent: false });
-    this.form.get('total')?.setValue(totalSum);
+    this.form.patchValue({
+      valor: totalSum,
+      abono: totalSum,
+      total: totalSum,
+    });
 
     this.onactualizarValor();
   }
@@ -348,9 +350,19 @@ export class FormFacturaCompraComponent implements OnInit {
       saldo = total - abono;
     }
 
-    this.form.get('saldo')?.setValue(saldo);
-    this.form.get('total')?.setValue(total);
-    this.form.get('abono')?.setValue(abono);
+    this.form.patchValue({
+      saldo,
+      total,
+      abono,
+      descuento,
+      subtotal: 0,
+      fecha: new Date(),
+      cajaId: 1,
+      formaPagoId: 1,
+      usuarioModif: 'Mi Mascota',
+      anulado: false,
+      descripcion: '',
+    });
   }
 
   getErrorMessage(controlName: string): string {

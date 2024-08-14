@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-github-button',
   template: `
-    <a mat-icon-button href="https://github.com/ng-matero/ng-matero" target="_blank">
+    <!-- <a mat-icon-button href="https://github.com/ng-matero/ng-matero" target="_blank">
       <svg viewBox="0 0 16 16">
         <path
           fill="currentColor"
@@ -21,7 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
           5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"
         ></path>
       </svg>
-    </a>
+    </a> -->
   `,
   standalone: true,
   imports: [MatButtonModule],

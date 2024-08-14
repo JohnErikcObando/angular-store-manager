@@ -92,8 +92,6 @@ export class FacturaVentasComponent implements OnInit {
   }
 
   openDialog(id: string): void {
-    console.log('este es el id', id);
-
     const dialogRef = this.dialog.open(FormAbonoComponent, {
       data: { id },
       disableClose: true,

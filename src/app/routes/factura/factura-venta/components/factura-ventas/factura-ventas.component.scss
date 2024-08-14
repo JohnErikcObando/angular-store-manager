@@ -1,7 +1,7 @@
 /* Global Styles */
 
 .table-container {
-  max-height: 250px; /* Adjust the height as needed */
+  max-height: 380px; /* Adjust the height as needed */
   overflow-y: auto;
 }
 
@@ -32,7 +32,7 @@
 
 .mat-table {
   width: 100%;
-  // min-width: 300px; /* Adjust this based on your column count */
+  min-width: 600px; /* Adjust this based on your column count */
 }
 
 .mat-header-cell,

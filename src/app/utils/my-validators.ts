@@ -11,7 +11,6 @@ export class MyValidators {
 
   static setEstado(estado: string) {
     MyValidators.estado = estado;
-    console.log('validador', estado);
   }
 
   static setCampo(campo: string) {
@@ -29,19 +28,6 @@ export class MyValidators {
     accion: string
   ) {
     return (control: AbstractControl): Observable<{ [key: string]: any } | null> => {
-      console.log(
-        'value',
-        control.value,
-        'campo',
-        MyValidators.campo,
-        'campodos',
-        MyValidators.campoDos,
-        'accion service',
-        accion,
-        'MyValidators.estado',
-        MyValidators.estado
-      );
-
       if (accion === 'Editar') {
         if (
           (fieldName === 'nombre' && control.value === MyValidators.campo) ||
@@ -70,17 +56,6 @@ export class MyValidators {
 
   static ValidarExistente(service: any, methodName: string, fieldName: string) {
     return (control: AbstractControl): Observable<{ [key: string]: any } | null> => {
-      console.log(
-        'value',
-        control.value,
-        'campo',
-        MyValidators.campo,
-        'campodos',
-        MyValidators.campoDos,
-        'MyValidators.estado',
-        MyValidators.estado
-      );
-
       if (MyValidators.estado === 'Editar') {
         return of(null);
       }

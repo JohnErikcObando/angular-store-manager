@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-translate',
   template: `
-    <button mat-icon-button [matMenuTriggerFor]="menu">
+    <!-- <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>translate</mat-icon>
     </button>
 
@@ -19,7 +19,7 @@ import { TranslateService } from '@ngx-translate/core';
           <span>{{ lang.value }}</span>
         </button>
       }
-    </mat-menu>
+    </mat-menu> -->
   `,
   standalone: true,
   imports: [KeyValuePipe, MatButtonModule, MatIconModule, MatMenuModule],

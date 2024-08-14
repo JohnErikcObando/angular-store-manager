@@ -222,7 +222,7 @@
 
             <mat-form-field class="form-small">
               <mat-label>Cantidad</mat-label>
-              <input matInput formControlName="cantidad" />
+              <input matInput formControlName="cantidad" type="number" />
               <mat-error *ngIf="compra.get('cantidad')?.invalid">
                 {{ getErrorMessage('detalleVenta.cantidad') }}
               </mat-error>
