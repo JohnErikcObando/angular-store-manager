@@ -1,5 +1,7 @@
 import { Component, inject, signal, ViewChild, OnInit } from '@angular/core';
 
+import { animate, state, style, transition, trigger } from '@angular/animations';
+
 // material
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -12,16 +14,25 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
 // interfaces
-import { Cliente, FacturaCompra, Proveedor } from 'app/interfaces';
+import { Compra, FacturaCompra } from 'app/interfaces';
 
 // services
-import { Sweetalert2Service } from '@shared/services/sweetalert2.service';
 import { FacturaCompraService } from 'app/services';
 
 // pipes
 import { CurrencyPipe, DatePipe } from '@angular/common';
 
 import { PageHeaderComponent } from '@shared';
+
+interface Factura {
+  factura: string;
+  fecha: string;
+  caja: string;
+  proveedor: string;
+  formaPago: string;
+  total: string;
+  compra: Compra;
+}
 
 @Component({
   selector: 'app-factura-compras',
@@ -41,11 +52,21 @@ import { PageHeaderComponent } from '@shared';
   ],
   templateUrl: './factura-compras.component.html',
   styleUrl: './factura-compras.component.scss',
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed,void', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class FacturaComprasComponent implements OnInit {
-  facturaCompra = signal<FacturaCompra[]>([]);
+  facturaCompra = signal<Factura[]>([]);
 
-  displayedColumns: string[] = [
+  dataSource = new MatTableDataSource<Factura>();
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  columnsToDisplay: string[] = [
     'factura',
     'fecha',
     'caja',
@@ -55,15 +76,14 @@ export class FacturaComprasComponent implements OnInit {
     'accion',
   ];
 
-  dataSource = new MatTableDataSource<FacturaCompra>();
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
+  expandedElement!: Factura | null;
 
   readonly estado = signal('');
   readonly proveedorId = signal('');
   readonly dialog = inject(MatDialog);
 
   private facturaCompraService = inject(FacturaCompraService);
-  private sweetalert2Service = inject(Sweetalert2Service);
 
   ngOnInit(): void {
     this.getAll();
@@ -72,8 +92,20 @@ export class FacturaComprasComponent implements OnInit {
   getAll() {
     this.facturaCompraService.getAll().subscribe({
       next: data => {
-        this.facturaCompra.set(data);
-        this.dataSource = new MatTableDataSource<FacturaCompra>(data);
+        const mappedData = data.map((item: any) => ({
+          factura: item.id,
+          fecha: item.fecha,
+          caja: item.caja.nombre,
+          proveedor: item.proveedor.nombre,
+          formaPago: item.forma_pago.nombre,
+          total: item.valor,
+          compra: item.compra, // Esto es para el detalle expandido
+        }));
+
+        this.facturaCompra.set(mappedData);
+        console.log(this.facturaCompra());
+
+        this.dataSource = new MatTableDataSource<Factura>(mappedData);
         this.dataSource.paginator = this.paginator;
       },
     });

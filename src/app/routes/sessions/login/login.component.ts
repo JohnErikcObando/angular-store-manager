@@ -55,13 +55,15 @@ export class LoginComponent {
   get rememberMe() {
     return this.loginForm.get('rememberMe')!;
   }
-
   login() {
     this.isSubmitting = true;
 
+    console.log('login');
+
+
     this.auth
       .login(this.username.value, this.password.value, this.rememberMe.value)
-      .pipe(filter(authenticated => authenticated))
+      .pipe(filter(authenticated => !!authenticated)) // Assuming the backend returns a truthy value if authenticated
       .subscribe({
         next: () => {
           this.router.navigateByUrl('/');

@@ -1,7 +1,7 @@
 /* Global Styles */
 
 .table-container {
-  max-height: 350px; /* Adjust the height as needed */
+  max-height: 384px; /* Adjust the height as needed */
   overflow-y: auto;
 }
 
@@ -28,6 +28,11 @@
 
 .table-container {
   overflow-x: auto;
+}
+
+.table2-container {
+  width: 90%;
+  margin-left: 10%;
 }
 
 .mat-table {
@@ -91,4 +96,25 @@ th {
   .filter-field {
     width: 100%;
   }
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
 }

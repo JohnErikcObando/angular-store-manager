@@ -53,6 +53,7 @@ export class ProductosComponent implements OnInit {
     'codigo',
     'descripcion',
     'valor',
+    'costo',
     'accion',
   ];
 

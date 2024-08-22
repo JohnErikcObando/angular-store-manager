@@ -98,6 +98,7 @@ export class FormProductosComponent implements OnInit {
     codigo: [''],
     descripcion: [''],
     valor: ['', [Validators.required]],
+    costo: ['', [Validators.required]],
     usuarioModif: ['MiMascota'],
   });
   constructor() {}

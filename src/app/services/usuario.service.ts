@@ -53,4 +53,21 @@ export class UsuarioService {
         })
       );
   }
+
+  validateUser(username: string, password: string) {
+    return this.http
+      .post<Usuario>(`${this.apiUrl}/login`, {
+        params: { username, password },
+      })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === HttpStatusCode.NotFound) {
+            // Manejar el error 404 aquí, por ejemplo, devolver un valor predeterminado
+            return throwError(() => ({ isAvailable: true }));
+          }
+          // Otros errores pueden manejarse según sea necesario
+          return throwError(() => new Error('Error en la solicitud'));
+        })
+      );
+  }
 }

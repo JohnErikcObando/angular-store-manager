@@ -58,6 +58,23 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Costo</mat-label>
+        <input
+          formControlName="costo"
+          matInput
+          placeholder="0.000"
+          type="number"
+          class="right-align"
+          required
+          class="right-align"
+        />
+        <span matTextPrefix>$&nbsp;</span>
+        @if (form.get('costo')?.invalid) {
+          <mat-error>{{ getErrorMessage('costo') }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field" style="grid-column: span 2">
         <mat-label>Codigo</mat-label>
         <input formControlName="codigo" matInput placeholder="0000000" class="right-align" />
         <mat-icon matSuffix>barcode</mat-icon>

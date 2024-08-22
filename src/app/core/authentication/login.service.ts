@@ -12,6 +12,7 @@ export class LoginService {
   protected readonly http = inject(HttpClient);
 
   login(username: string, password: string, rememberMe = false) {
+    console.log('hola');
     return this.http.post<Token>('/auth/login', { username, password, rememberMe });
   }
 
