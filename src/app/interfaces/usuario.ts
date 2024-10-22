@@ -1,3 +1,4 @@
+import { RolUsuario } from './rol-usuario';
 export interface Usuario {
   id: number;
   rolUsuarioId: number;
@@ -7,8 +8,9 @@ export interface Usuario {
   apellido: string;
   email: string;
   activo: boolean;
-  fechaNow?: Date;
-  usuarioModif?: string;
+  fechaNow: Date;
+  usuarioModif: string;
+  rol_usuario: RolUsuario;
 }
 
 export interface CreateUsuarioDTO extends Omit<Usuario, 'id'> {}

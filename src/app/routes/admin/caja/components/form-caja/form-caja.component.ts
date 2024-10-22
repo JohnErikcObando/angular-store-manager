@@ -35,7 +35,7 @@ import { Caja } from 'app/interfaces';
 import { AjustarTextoPipe } from '@shared/pipes/ajustar-texto.pipe';
 
 import { DialogData, FormValidationService } from '@shared';
-import { ValidatorCampoExistente } from '@shared/validators/validators/validatorCampoExistente';
+
 import { MyValidators } from 'app/utils';
 
 @Component({
@@ -88,7 +88,7 @@ export class FormCajaComponent implements OnInit {
     numFactura: ['0', [Validators.required]],
     prefijo: ['', [Validators.required, Validators.maxLength(2)]],
     tipoFactura: ['', [Validators.required]],
-    usuarioModif: ['MiMascota'],
+    usuarioModif: [''],
   });
 
   constructor() {}
@@ -112,6 +112,8 @@ export class FormCajaComponent implements OnInit {
   create() {
     const data = this.form.value;
 
+    data.usuarioModif = this.data.username;
+
     this.cajaService.create(data).subscribe(rta => {
       this.sweetalert2Service.swalSuccess('La caja se registro Correctamente');
       this.dialogRef.close();
@@ -120,6 +122,10 @@ export class FormCajaComponent implements OnInit {
 
   update() {
     const data = this.form.value;
+
+    data.usuarioModif = this.data.username;
+
+    console.log('data caja', data);
 
     this.cajaService.update(this.cajaId(), data).subscribe(rta => {
       this.sweetalert2Service.swalSuccess('La caja se edito Correctamente');

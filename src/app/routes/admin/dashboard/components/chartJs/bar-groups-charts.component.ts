@@ -72,14 +72,14 @@ export class BarGroupsChartsComponent implements OnInit {
 
     // Ajustar el tamaño del canvas al contenedor
     const container = this.barChartRef?.nativeElement.parentElement;
-    if (container) {
-      container.style.width = '100%';
-      container.style.height = '100%';
+    // if (container) {
+    //   container.style.width = '100%';
+    //   container.style.height = '100%';
 
-      // Aplicar estilos al canvas
-      const canvas = this.barChartRef?.nativeElement;
-      canvas.style.width = '100%';
-      canvas.style.height = '100%';
-    }
+    //   // Aplicar estilos al canvas
+    //   const canvas = this.barChartRef?.nativeElement;
+    //   canvas.style.width = '100%';
+    //   canvas.style.height = '100%';
+    // }
   }
 }

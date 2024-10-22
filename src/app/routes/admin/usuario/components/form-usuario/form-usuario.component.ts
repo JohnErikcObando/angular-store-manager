@@ -114,6 +114,8 @@ export class FormUsuarioComponent implements OnInit {
   create() {
     const data = this.form.value;
 
+    data.usuarioModif = this.data.username;
+
     this.usuarioService.create(data).subscribe(rta => {
       this.sweetalert2Service.swalSuccess('El usuario se registro Correctamente');
       this.dialogRef.close();
@@ -122,6 +124,8 @@ export class FormUsuarioComponent implements OnInit {
 
   update() {
     const data = this.form.value;
+
+    data.usuarioModif = this.data.username;
 
     this.usuarioService.update(this.usuarioId(), data).subscribe(rta => {
       this.sweetalert2Service.swalSuccess('El usuario se edito Correctamente');
@@ -133,6 +137,8 @@ export class FormUsuarioComponent implements OnInit {
     this.usuarioService.get(usuarioId).subscribe({
       next: user => {
         this.form.patchValue(user);
+        console.log('Usuario cargado:', user);
+        console.log('Tipo', this.form.get('activo')?.value || 0);
       },
       error: () => {
         this.usuario.set([]);

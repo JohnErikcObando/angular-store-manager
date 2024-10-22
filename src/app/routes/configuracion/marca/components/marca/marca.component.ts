@@ -38,6 +38,7 @@ import { FormMarcaComponent } from '../form-marca/form-marca.component';
 })
 export class MarcaComponent implements OnInit {
   marca = signal<Marca[]>([]);
+  username = signal('');
 
   displayedColumns: string[] = ['nombre', 'descripcion', 'accion'];
 
@@ -52,6 +53,7 @@ export class MarcaComponent implements OnInit {
   private sweetalert2Service = inject(Sweetalert2Service);
 
   ngOnInit(): void {
+    this.username.set(localStorage.getItem('username') || 'MiMascota');
     this.getAll();
   }
 
@@ -66,11 +68,11 @@ export class MarcaComponent implements OnInit {
   }
 
   create() {
-    this.openDialog('Guardar', '');
+    this.openDialog('Guardar', '', this.username());
   }
 
   edit(id: string) {
-    this.openDialog('Editar', id);
+    this.openDialog('Editar', id, this.username());
   }
 
   delete(id: string) {
@@ -90,9 +92,9 @@ export class MarcaComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  openDialog(estado: string, id: string): void {
+  openDialog(estado: string, id: string, username: string): void {
     const dialogRef = this.dialog.open(FormMarcaComponent, {
-      data: { estado, id },
+      data: { estado, id, username },
       disableClose: true,
     });
 

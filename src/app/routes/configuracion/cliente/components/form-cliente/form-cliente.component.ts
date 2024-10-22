@@ -113,6 +113,8 @@ export class FormClienteComponent implements OnInit {
   create() {
     const data = this.form.value;
 
+    data.usuarioModif = this.data.username;
+
     this.clienteService.create(data).subscribe(rta => {
       this.sweetalert2Service.swalSuccess('El cliente se registro Correctamente');
       this.dialogRef.close();
@@ -121,6 +123,8 @@ export class FormClienteComponent implements OnInit {
 
   update() {
     const data = this.form.value;
+
+    data.usuarioModif = this.data.username;
 
     this.clienteService.update(this.clienteId(), data).subscribe(rta => {
       this.sweetalert2Service.swalSuccess('El cliente se edito Correctamente');

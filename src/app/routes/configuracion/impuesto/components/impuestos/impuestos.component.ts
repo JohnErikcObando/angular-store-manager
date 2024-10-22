@@ -41,6 +41,7 @@ import { ImpuestoService } from 'app/services';
 })
 export class ImpuestosComponent implements OnInit {
   impuesto = signal<Impuesto[]>([]);
+  username = signal('');
 
   displayedColumns: string[] = ['nombre', 'porcentaje', 'accion'];
 
@@ -55,6 +56,7 @@ export class ImpuestosComponent implements OnInit {
   private sweetalert2Service = inject(Sweetalert2Service);
 
   ngOnInit(): void {
+    this.username.set(localStorage.getItem('username') || 'MiMascota');
     this.getAll();
   }
 
@@ -69,11 +71,11 @@ export class ImpuestosComponent implements OnInit {
   }
 
   create() {
-    this.openDialog('Guardar', '');
+    this.openDialog('Guardar', '', this.username());
   }
 
   edit(id: string) {
-    this.openDialog('Editar', id);
+    this.openDialog('Editar', id, this.username());
   }
 
   delete(id: string) {
@@ -93,9 +95,9 @@ export class ImpuestosComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  openDialog(estado: string, id: string): void {
+  openDialog(estado: string, id: string, username: string): void {
     const dialogRef = this.dialog.open(FormImpuestoComponent, {
-      data: { estado, id },
+      data: { estado, id, username },
       disableClose: true,
     });
 

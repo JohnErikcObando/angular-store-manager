@@ -23,6 +23,8 @@ import { FacturaCompraService } from 'app/services';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 
 import { PageHeaderComponent } from '@shared';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 interface Factura {
   factura: string;
@@ -38,7 +40,11 @@ interface Factura {
   selector: 'app-factura-compras',
   standalone: true,
   imports: [
+    CurrencyPipe,
+    DatePipe,
     MatButtonModule,
+    MatCardModule,
+    MatDatepickerModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -46,9 +52,7 @@ interface Factura {
     MatProgressSpinnerModule,
     MatTableModule,
     PageHeaderComponent,
-    MatCardModule,
-    DatePipe,
-    CurrencyPipe,
+    ReactiveFormsModule,
   ],
   templateUrl: './factura-compras.component.html',
   styleUrl: './factura-compras.component.scss',
@@ -65,6 +69,14 @@ export class FacturaComprasComponent implements OnInit {
 
   dataSource = new MatTableDataSource<Factura>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  startOfMonth = signal(new Date());
+  endOfMonth = signal(new Date());
+
+  readonly range = new FormGroup({
+    start: new FormControl<Date | null>(this.startOfMonth()),
+    end: new FormControl<Date | null>(this.startOfMonth()),
+  });
 
   columnsToDisplay: string[] = [
     'factura',
@@ -86,17 +98,35 @@ export class FacturaComprasComponent implements OnInit {
   private facturaCompraService = inject(FacturaCompraService);
 
   ngOnInit(): void {
+    this.startOfMonth.set(new Date()); // Primer día del mes
+    this.endOfMonth.set(new Date()); // Último día del mes
+
+    console.log(this.startOfMonth(), this.endOfMonth());
+
+    // Escuchar cambios en el formulario de rango de fechas
+    this.range.valueChanges.subscribe(rangeValues => {
+      const { start, end } = rangeValues;
+
+      // Si ambas fechas están definidas, actualiza startOfMonth y endOfMonth
+      if (start && end) {
+        this.startOfMonth.set(start);
+        this.endOfMonth.set(end);
+      }
+    });
+
     this.getAll();
   }
 
   getAll() {
-    this.facturaCompraService.getAll().subscribe({
+    console.log('this.startOfMonth()', this.startOfMonth(), 'this.endOfMonth()', this.endOfMonth());
+
+    this.facturaCompraService.getAll(this.startOfMonth(), this.endOfMonth()).subscribe({
       next: data => {
         const mappedData = data.map((item: any) => ({
           factura: item.id,
           fecha: item.fecha,
           caja: item.caja.nombre,
-          proveedor: item.proveedor.nombre,
+          proveedor: item.proveedor?.nombre,
           formaPago: item.forma_pago.nombre,
           total: item.valor,
           compra: item.compra, // Esto es para el detalle expandido

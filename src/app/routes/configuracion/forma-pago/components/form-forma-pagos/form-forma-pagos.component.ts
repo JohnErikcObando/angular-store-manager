@@ -105,6 +105,7 @@ export class FormFormaPagosComponent implements OnInit {
 
   create() {
     const data = this.form.value;
+    data.usuarioModif = this.data.username;
 
     this.formaPagoService.create(data).subscribe(rta => {
       this.sweetalert2Service.swalSuccess('La forma de Pago se registro Correctamente');
@@ -114,6 +115,7 @@ export class FormFormaPagosComponent implements OnInit {
 
   update() {
     const data = this.form.value;
+    data.usuarioModif = this.data.username;
 
     this.formaPagoService.update(this.formaPagoId(), data).subscribe(rta => {
       this.sweetalert2Service.swalSuccess('La forma de Pago se edito Correctamente');

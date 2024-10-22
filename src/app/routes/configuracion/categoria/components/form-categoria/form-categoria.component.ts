@@ -34,7 +34,6 @@ import { Categoria } from 'app/interfaces';
 import { AjustarTextoPipe } from '@shared/pipes/ajustar-texto.pipe';
 
 import { DialogData, FormValidationService } from '@shared';
-import { ValidatorCampoExistente } from '@shared/validators/validators/validatorCampoExistente';
 import { MyValidators } from 'app/utils';
 
 @Component({
@@ -84,7 +83,7 @@ export class FormCategoriaComponent implements OnInit {
       [Validators.required],
       MyValidators.ValidarCampoExistente(
         this.categoriaService,
-        'findByImpuesto',
+        'findByCategoria',
         'nombre',
         this.data.estado
       ),
@@ -100,6 +99,8 @@ export class FormCategoriaComponent implements OnInit {
   }
 
   save() {
+    console.log('valid', this.form.valid, 'this.form.value', this.form.value);
+
     if (this.form.valid) {
       if (this.botonAccion() === 'Guardar') {
         this.create();
@@ -114,6 +115,10 @@ export class FormCategoriaComponent implements OnInit {
   create() {
     const data = this.form.value;
 
+    console.log('categoria', data);
+
+    data.usuarioModif = this.data.username;
+
     this.categoriaService.create(data).subscribe(rta => {
       this.sweetalert2Service.swalSuccess('La categoria se registro Correctamente');
       this.dialogRef.close();
@@ -122,6 +127,8 @@ export class FormCategoriaComponent implements OnInit {
 
   update() {
     const data = this.form.value;
+
+    data.usuarioModif = this.data.username;
 
     this.categoriaService.update(this.categoriaId(), data).subscribe(rta => {
       this.sweetalert2Service.swalSuccess('La categoria se edito Correctamente');

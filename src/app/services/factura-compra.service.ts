@@ -31,8 +31,13 @@ export class FacturaCompraService {
     return this.http.delete<FacturaCompra>(`${this.apiUrl}/${id}`);
   }
 
-  getAll() {
-    return this.http.get<FacturaCompra[]>(this.apiUrl);
+  getAll(startOfMonth: Date, endOfMonth: Date) {
+    const params = {
+      fechaInicio: startOfMonth.toISOString(),
+      fechaFin: endOfMonth.toISOString(),
+    };
+
+    return this.http.get<FacturaCompra[]>(this.apiUrl, { params });
   }
 
   get(id: number) {

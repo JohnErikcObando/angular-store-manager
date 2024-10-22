@@ -121,6 +121,7 @@ export class FormProveedoresComponent implements OnInit {
 
   create() {
     const data = this.form.value;
+    data.usuarioModif = this.data.username;
 
     this.proveedorService.create(data).subscribe(rta => {
       this.sweetalert2Service.swalSuccess('El proveedor se registro Correctamente');
@@ -130,6 +131,7 @@ export class FormProveedoresComponent implements OnInit {
 
   update() {
     const data = this.form.value;
+    data.usuarioModif = this.data.username;
 
     this.proveedorService.update(this.proveedorId(), data).subscribe(rta => {
       this.sweetalert2Service.swalSuccess('El proveedor se edito Correctamente');

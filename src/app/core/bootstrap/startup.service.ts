@@ -22,7 +22,7 @@ export class StartupService {
       this.authService
         .change()
         .pipe(
-          tap(user => this.setPermissions(user)),
+          // tap(user => this.setPermissions(user)),
           switchMap(() => this.authService.menu()),
           tap(menu => this.setMenu(menu))
         )

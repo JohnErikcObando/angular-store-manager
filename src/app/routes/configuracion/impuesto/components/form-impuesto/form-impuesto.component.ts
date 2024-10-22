@@ -107,6 +107,7 @@ export class FormImpuestoComponent implements OnInit {
 
   create() {
     const data = this.form.value;
+    data.usuarioModif = this.data.username;
 
     this.impuestoService.create(data).subscribe(rta => {
       this.sweetalert2Service.swalSuccess('El impuesto se registro Correctamente');
@@ -116,6 +117,7 @@ export class FormImpuestoComponent implements OnInit {
 
   update() {
     const data = this.form.value;
+    data.usuarioModif = this.data.username;
 
     this.impuestoService.update(this.impuestoId(), data).subscribe(rta => {
       this.sweetalert2Service.swalSuccess('El impuesto se edito Correctamente');

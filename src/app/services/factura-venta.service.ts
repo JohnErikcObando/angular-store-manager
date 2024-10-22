@@ -31,8 +31,13 @@ export class FacturaVentaService {
     return this.http.delete<FacturaVenta>(`${this.apiUrl}/${id}`);
   }
 
-  getAll() {
-    return this.http.get<FacturaVenta[]>(this.apiUrl);
+  getAll(startOfMonth: Date, endOfMonth: Date) {
+    const params = {
+      fechaInicio: startOfMonth.toISOString(),
+      fechaFin: endOfMonth.toISOString(),
+    };
+
+    return this.http.get<FacturaVenta[]>(this.apiUrl, { params });
   }
 
   get(id: string) {

@@ -82,6 +82,7 @@ export class FormFacturaCompraComponent implements OnInit {
   facturaCompra = signal<FacturaCompra[]>([]);
   imagenUrl = signal('');
   ocultar = signal(false);
+  username = signal('');
 
   filteredProveedor!: Observable<Proveedor[]>;
   filteredProducto!: Observable<Producto[]>;
@@ -127,6 +128,7 @@ export class FormFacturaCompraComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.username.set(localStorage.getItem('username') || 'MiMascota');
     this.getAllCajas();
     this.getAllFormasPago();
     this.getAllProveedores();
@@ -147,6 +149,7 @@ export class FormFacturaCompraComponent implements OnInit {
     this.form.get('cajaId')?.enable();
 
     const data = this.form.value;
+    data.usuarioModif = this.username();
 
     delete data.nombreProducto;
     delete data.nombreProveedor;
@@ -269,7 +272,7 @@ export class FormFacturaCompraComponent implements OnInit {
       costo: [event.costo, Validators.required],
       venta: [event.valor, Validators.required],
       total: [0, Validators.required],
-      usuarioModif: ['MiMascota'],
+      usuarioModif: [this.username()],
     });
 
     // Inicializar el total para el nuevo FormGroup

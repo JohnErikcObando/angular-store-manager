@@ -5,12 +5,7 @@
     <div class="form-grid">
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Usuario</mat-label>
-        <input
-          formControlName="usuario"
-          matInput
-          placeholder="usuario"
-
-        />
+        <input formControlName="usuario" matInput placeholder="usuario" />
         @if (form.get('usuario')?.invalid) {
           <mat-error>{{ getErrorMessage('usuario') }}</mat-error>
         }
@@ -90,8 +85,8 @@
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Estado</mat-label>
         <mat-select formControlName="activo" required>
-          <mat-option value="true">Activo</mat-option>
-          <mat-option value="false">Inactivo</mat-option>
+          <mat-option [value]="true">Activo</mat-option>
+          <mat-option [value]="false">Inactivo</mat-option>
         </mat-select>
         @if (form.get('activo')?.invalid) {
           <mat-error>{{ getErrorMessage('activo') }}</mat-error>

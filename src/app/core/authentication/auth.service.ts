@@ -12,6 +12,8 @@ export class AuthService {
   private readonly loginService = inject(LoginService);
   private readonly tokenService = inject(TokenService);
 
+  private storageKey = 'currentUser';
+
   private user$ = new BehaviorSubject<User>({});
   private change$ = merge(
     this.tokenService.change(),
@@ -34,15 +36,15 @@ export class AuthService {
   }
 
   login(username: string, password: string, rememberMe = true) {
-    console.log('login auth');
-
-    return this.loginService.login(username, password).pipe(
-      tap(token => this.tokenService.set(token)),
+    return this.loginService.login(username, password, rememberMe).pipe(
+      tap(token => this.tokenService.set(token, username)),
       map(() => this.check())
     );
   }
 
   refresh() {
+    console.log('se ejecuto el refresh');
+
     return this.loginService
       .refresh(filterObject({ refresh_token: this.tokenService.getRefreshToken() }))
       .pipe(
@@ -77,5 +79,24 @@ export class AuthService {
     }
 
     return this.loginService.me().pipe(tap(user => this.user$.next(user)));
+  }
+
+  // Guardar el usuario en el localStorage
+  setUser(user: any): void {
+    // localStorage.setItem(this.storageKey, JSON.stringify(user));
+    console.log('localStorage');
+
+    localStorage.setItem(this.storageKey, JSON.stringify(user));
+  }
+
+  // Obtener el usuario del localStorage
+  getUser(): any {
+    const user = localStorage.getItem(this.storageKey);
+    return user ? JSON.parse(user) : null;
+  }
+
+  // Eliminar el usuario del localStorage
+  removeUser(): void {
+    localStorage.removeItem(this.storageKey);
   }
 }

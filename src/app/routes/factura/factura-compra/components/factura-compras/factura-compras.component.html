@@ -10,10 +10,38 @@
       </mat-card-header>
 
       <mat-card-content>
-        <mat-form-field class="filter-field">
-          <mat-label>Filter</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Ej. Nombre" #input />
-        </mat-form-field>
+        <div class="form-group">
+          <div class="form-row">
+            <mat-form-field class="form-half">
+              <mat-label>Filter</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Ej. Nombre" #input />
+            </mat-form-field>
+
+            <mat-form-field class="form-half">
+              <mat-label> Filtro Fecha</mat-label>
+              <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                <input matStartDate formControlName="start" placeholder="Start date" />
+                <input matEndDate formControlName="end" placeholder="End date" />
+              </mat-date-range-input>
+              <!-- <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint> -->
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-date-range-picker #picker></mat-date-range-picker>
+
+              @if (range.controls.start.hasError('matStartDateInvalid')) {
+                <mat-error>Invalid start date</mat-error>
+              }
+              @if (range.controls.end.hasError('matEndDateInvalid')) {
+                <mat-error>Invalid end date</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-card-actions>
+              <button mat-flat-button color="primary" type="button" (click)="getAll()">
+                Buscar
+              </button>
+            </mat-card-actions>
+          </div>
+        </div>
 
         <div class="table-container">
           <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
@@ -117,11 +145,7 @@
               [class.expanded-row]="expandedElement === element"
               (click)="expandedElement = expandedElement === element ? null : element"
             ></tr>
-            <tr
-              mat-row
-              *matRowDef="let row; columns: ['expandedDetail']"
-              class="detail-row"
-            ></tr>
+            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
           </table>
         </div>
       </mat-card-content>

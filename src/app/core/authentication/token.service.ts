@@ -11,7 +11,7 @@ import { TokenFactory } from './token-factory.service';
   providedIn: 'root',
 })
 export class TokenService implements OnDestroy {
-  private readonly key = 'ng-matero-token';
+  private readonly key = 'token';
 
   private readonly store = inject(LocalStorageService);
   private readonly factory = inject(TokenFactory);
@@ -41,8 +41,8 @@ export class TokenService implements OnDestroy {
     return this.refresh$.pipe(share());
   }
 
-  set(token?: Token) {
-    this.save(token);
+  set(token?: Token, username?: string) {
+    this.save(token, username);
 
     return this;
   }
@@ -67,16 +67,22 @@ export class TokenService implements OnDestroy {
     this.clearRefresh();
   }
 
-  private save(token?: Token) {
+  private save(token?: Token, username?: string) {
     this._token = undefined;
 
     if (!token) {
       this.store.remove(this.key);
+      this.store.remove('username');
     } else {
       const value = Object.assign({ access_token: '', token_type: 'Bearer' }, token, {
         exp: token.expires_in ? currentTimestamp() + token.expires_in : null,
       });
       this.store.set(this.key, filterObject(value));
+
+      // Guardar username
+      if (username) {
+        localStorage.setItem('username', username);
+      }
     }
 
     this.change$.next(this.token);

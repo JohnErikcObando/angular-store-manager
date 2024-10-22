@@ -34,7 +34,6 @@ import { Marca } from 'app/interfaces';
 import { AjustarTextoPipe } from '@shared/pipes/ajustar-texto.pipe';
 
 import { DialogData, FormValidationService } from '@shared';
-import { ValidatorCampoExistente } from '@shared/validators/validators/validatorCampoExistente';
 import { MyValidators } from 'app/utils';
 
 @Component({

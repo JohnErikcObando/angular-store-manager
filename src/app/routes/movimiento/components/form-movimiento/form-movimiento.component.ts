@@ -105,6 +105,7 @@ export class FormMovimientoComponent implements OnInit {
 
   create() {
     const data = this.form.value;
+    data.usuarioModif = this.data.username;
 
     this.movimientoService.create(data).subscribe(rta => {
       this.sweetalert2Service.swalSuccess('El movimiento se registro Correctamente');
@@ -114,6 +115,7 @@ export class FormMovimientoComponent implements OnInit {
 
   update() {
     const data = this.form.value;
+    data.usuarioModif = this.data.username;
 
     this.movimientoService.update(this.moviminetoId(), data).subscribe(rta => {
       this.sweetalert2Service.swalSuccess('El movimiento se edito Correctamente');

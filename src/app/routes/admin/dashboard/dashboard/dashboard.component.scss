@@ -1,7 +1,14 @@
 .card-content {
-  height: 300px;
+  height: 350px;
   width: 100%;
   // display: inline-flex;
+  justify-content: center; /* Centrado horizontal */
+  align-items: center; /* Centrado vertical */
+}
+
+.card-content-md {
+  height: 350px;
+  width: 100%;
   justify-content: center; /* Centrado horizontal */
   align-items: center; /* Centrado vertical */
 }

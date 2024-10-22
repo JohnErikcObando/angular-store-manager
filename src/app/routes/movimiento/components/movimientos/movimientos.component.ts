@@ -44,6 +44,7 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 })
 export class MovimientosComponent implements OnInit {
   movimietos = signal<Movimiento[]>([]);
+  username = signal('');
 
   displayedColumns: string[] = ['fecha', 'tipo', 'descripcion', 'valor', 'factura', 'accion'];
 
@@ -58,6 +59,7 @@ export class MovimientosComponent implements OnInit {
   private sweetalert2Service = inject(Sweetalert2Service);
 
   ngOnInit(): void {
+    this.username.set(localStorage.getItem('username') || 'MiMascota');
     this.getAll();
   }
 
@@ -72,11 +74,11 @@ export class MovimientosComponent implements OnInit {
   }
 
   create() {
-    this.openDialog('Guardar', '');
+    this.openDialog('Guardar', '', this.username());
   }
 
   edit(id: string) {
-    this.openDialog('Editar', id);
+    this.openDialog('Editar', id, this.username());
   }
 
   delete(id: string) {
@@ -96,9 +98,9 @@ export class MovimientosComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  openDialog(estado: string, id: string): void {
+  openDialog(estado: string, id: string, username: string): void {
     const dialogRef = this.dialog.open(FormMovimientoComponent, {
-      data: { estado, id },
+      data: { estado, id, username },
       disableClose: true,
     });
 

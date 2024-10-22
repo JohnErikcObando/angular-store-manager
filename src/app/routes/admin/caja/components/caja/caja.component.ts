@@ -38,6 +38,7 @@ import { FormCajaComponent } from '../form-caja/form-caja.component';
 })
 export class CajaComponent implements OnInit {
   caja = signal<Caja[]>([]);
+  username = signal('');
 
   displayedColumns: string[] = ['nombre', 'numFactura', 'prefijo', 'tipoDocumento', 'accion'];
 
@@ -52,6 +53,8 @@ export class CajaComponent implements OnInit {
   private sweetalert2Service = inject(Sweetalert2Service);
 
   ngOnInit(): void {
+    this.username.set(localStorage.getItem('username') || 'MiMascota');
+
     this.getAll();
   }
 
@@ -66,20 +69,24 @@ export class CajaComponent implements OnInit {
   }
 
   create() {
-    this.openDialog('Guardar', '');
+    this.openDialog('Guardar', '', this.username());
   }
 
   edit(id: string) {
-    this.openDialog('Editar', id);
+    this.openDialog('Editar', id, this.username());
+    console.log(this.username());
   }
 
   delete(id: string) {
     this.sweetalert2Service.swalDelete('¿Desea eliminar la caja?').subscribe(confirmed => {
       if (confirmed) {
-        this.cajaService.delete(id).subscribe(() => {
-          this.sweetalert2Service.swalSuccess('La caja se eliminó correctamente');
+        console.log('this.username()', this.username());
+        this.cajaService.patch(id, this.username()).subscribe(() => {
+          this.cajaService.delete(id).subscribe(() => {
+            this.sweetalert2Service.swalSuccess('La caja se eliminó correctamente');
 
-          this.getAll();
+            this.getAll();
+          });
         });
       }
     });
@@ -90,9 +97,9 @@ export class CajaComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  openDialog(estado: string, id: string): void {
+  openDialog(estado: string, id: string, username: string): void {
     const dialogRef = this.dialog.open(FormCajaComponent, {
-      data: { estado, id },
+      data: { estado, id, username },
       disableClose: true,
     });
 

@@ -1,10 +1,13 @@
 import { Component, inject, signal, ViewChild, OnInit } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 // material
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator } from '@angular/material/paginator';
@@ -18,7 +21,7 @@ import { FacturaVenta, Venta } from 'app/interfaces';
 import { FacturaVentaService } from 'app/services';
 
 // pipes
-import { CurrencyPipe, DatePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe, JsonPipe } from '@angular/common';
 
 import { PageHeaderComponent } from '@shared';
 import { FormAbonoComponent } from 'app/routes/factura/form-abono/form-abono.component';
@@ -27,18 +30,22 @@ import { FormAbonoComponent } from 'app/routes/factura/form-abono/form-abono.com
   selector: 'app-factura-ventas',
   standalone: true,
   imports: [
+    CurrencyPipe,
+    DatePipe,
+    FormAbonoComponent,
+    JsonPipe,
     MatButtonModule,
+    MatCardModule,
+    MatDatepickerModule,
     MatFormFieldModule,
+    MatGridListModule,
     MatIconModule,
     MatInputModule,
     MatPaginator,
     MatProgressSpinnerModule,
     MatTableModule,
     PageHeaderComponent,
-    MatCardModule,
-    DatePipe,
-    CurrencyPipe,
-    FormAbonoComponent,
+    ReactiveFormsModule,
   ],
   templateUrl: './factura-ventas.component.html',
   styleUrl: './factura-ventas.component.scss',
@@ -46,6 +53,8 @@ import { FormAbonoComponent } from 'app/routes/factura/form-abono/form-abono.com
 export class FacturaVentasComponent implements OnInit {
   facturaVenta = signal<FacturaVenta[]>([]);
   venta = signal<Venta[]>([]);
+  startOfMonth = signal(new Date());
+  endOfMonth = signal(new Date());
 
   displayedColumns: string[] = [
     'factura',
@@ -64,20 +73,43 @@ export class FacturaVentasComponent implements OnInit {
 
   readonly estado = signal('Guardar');
   readonly proveedorId = signal('');
-  readonly dialog = inject(MatDialog);
+
+  readonly range = new FormGroup({
+    start: new FormControl<Date | null>(this.startOfMonth()),
+    end: new FormControl<Date | null>(this.startOfMonth()),
+  });
 
   private facturaVentaService = inject(FacturaVentaService);
+  readonly dialog = inject(MatDialog);
 
   resultsLength = 0;
   isLoadingResults = true;
   isRateLimitReached = false;
 
   ngOnInit(): void {
+    this.startOfMonth.set(new Date()); // Primer día del mes
+    this.endOfMonth.set(new Date()); // Último día del mes
+
+    console.log(this.startOfMonth(), this.endOfMonth());
+
+    // Escuchar cambios en el formulario de rango de fechas
+    this.range.valueChanges.subscribe(rangeValues => {
+      const { start, end } = rangeValues;
+
+      // Si ambas fechas están definidas, actualiza startOfMonth y endOfMonth
+      if (start && end) {
+        this.startOfMonth.set(start);
+        this.endOfMonth.set(end);
+      }
+    });
+
     this.getAll();
   }
 
   getAll() {
-    this.facturaVentaService.getAll().subscribe({
+    console.log('this.startOfMonth()', this.startOfMonth(), 'this.endOfMonth()', this.endOfMonth());
+
+    this.facturaVentaService.getAll(this.startOfMonth(), this.endOfMonth()).subscribe({
       next: data => {
         this.facturaVenta.set(data);
         this.dataSource = new MatTableDataSource<FacturaVenta>(data);

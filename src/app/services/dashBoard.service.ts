@@ -27,6 +27,11 @@ export class DashBoardService {
     return this.http.get<MovimientoTipoMes[]>(url).pipe(retry(3));
   }
 
+  getCategoriaMes() {
+    const url = `${this.apiUrl}categoria-mes`;
+    return this.http.get<MovimientoTipoMes[]>(url).pipe(retry(3));
+  }
+
   getProductosMes() {
     const url = `${this.apiUrl}productos-mas-vendidos-por-mes`;
     return this.http.get<ProductosVendidosPorMes[]>(url).pipe(retry(3));
