@@ -31,8 +31,13 @@ export class MovimientoService {
     return this.http.delete<Movimiento>(`${this.apiUrl}/${id}`);
   }
 
-  getAll() {
-    return this.http.get<Movimiento[]>(this.apiUrl);
+  getAll(startOfMonth: Date, endOfMonth: Date) {
+    const params = {
+      fechaInicio: startOfMonth.toISOString(),
+      fechaFin: endOfMonth.toISOString(),
+    };
+
+    return this.http.get<Movimiento[]>(this.apiUrl, { params });
   }
 
   get(id: string) {

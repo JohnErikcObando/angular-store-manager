@@ -367,7 +367,7 @@ export class FormFacturaCompraComponent implements OnInit {
       descripcion: '',
     });
   }
-
+//
   getErrorMessage(controlName: string): string {
     const control: AbstractControl | null = this.form.get(controlName);
     if (control) {

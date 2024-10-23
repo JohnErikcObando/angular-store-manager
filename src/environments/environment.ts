@@ -5,9 +5,9 @@
 export const environment = {
   production: false,
   baseUrl: '',
-  apiUrl: 'http://localhost:3000/',
-  // apiUrl: 'https://backendmimascota.fly.dev/',
-  useHash: false,
+  // apiUrl: 'http://localhost:3000/',
+  apiUrl: 'https://backendmimascota.fly.dev',
+  // useHash: false,
 };
 
 /*

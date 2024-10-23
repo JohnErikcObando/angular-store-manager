@@ -14,7 +14,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
 // interfaces
-import { Compra, FacturaCompra } from 'app/interfaces';
+import { Compra } from 'app/interfaces';
 
 // services
 import { FacturaCompraService } from 'app/services';
@@ -100,8 +100,6 @@ export class FacturaComprasComponent implements OnInit {
   ngOnInit(): void {
     this.startOfMonth.set(new Date()); // Primer día del mes
     this.endOfMonth.set(new Date()); // Último día del mes
-
-    console.log(this.startOfMonth(), this.endOfMonth());
 
     // Escuchar cambios en el formulario de rango de fechas
     this.range.valueChanges.subscribe(rangeValues => {

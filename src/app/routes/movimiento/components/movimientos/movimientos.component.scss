@@ -1,4 +1,27 @@
 /* Global Styles */
+.form-group {
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 5px;
+}
+
+.form-small {
+  width: 15%;
+}
+
+.form-half {
+  width: 40%;
+}
+
+.form-full {
+  width: 60%;
+}
 
 .table-container {
   max-height: 350px; /* Adjust the height as needed */
