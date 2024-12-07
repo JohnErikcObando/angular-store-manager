@@ -1,0 +1,78 @@
+:root {
+  --primary-color: #0074e9;
+  --secondary-color: #e0e0e0;
+  --font-size-small: 14px;
+  --font-size-medium: 16px;
+}
+
+th {
+  font-weight: bold;
+  background-color: #e0e0e0; /* Color de fondo */
+  color: #0074e9;
+  font-size: 17px;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: #0074e9;
+}
+
+.row {
+  margin: 16px 0;
+}
+
+.filter-field {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 16px;
+}
+
+.table-container {
+  max-height: 384px;
+  overflow-y: auto;
+}
+
+.mat-header-cell,
+.mat-cell {
+  padding: 12px;
+  font-size: var(--font-size-medium);
+}
+
+.mat-header-cell {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+.mat-footer-cell {
+  font-weight: bold;
+}
+
+.right-align {
+  text-align: right;
+}
+
+.center-align {
+  text-align: center;
+}
+
+.close-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-close-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Centra verticalmente los elementos */
+  margin-bottom: 16px; /* Espaciado entre el contenedor y el resto del contenido */
+}
+
+.filter-field {
+  width: 50%; /* Ajusta el tamaño según tus necesidades */
+}

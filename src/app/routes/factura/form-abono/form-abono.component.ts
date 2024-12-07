@@ -12,10 +12,13 @@ import { CommonModule } from '@angular/common';
 
 // material
 import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
@@ -26,21 +29,16 @@ import {
 } from '@angular/material/dialog';
 
 // servicios
+import { AbonosFacturaVentaService, FacturaVentaService, FormaPagoService } from 'app/services';
 import { Sweetalert2Service } from '@shared/services/sweetalert2.service';
 
-import { ValidatorsService } from '@shared/validators/servicios/validators.service';
-
 // interfaces
-import { DialogData, FormValidationService } from '@shared';
-import { AbonosFacturaVentaService, FormaPagoService } from 'app/services';
 import { AbonosFacturaVenta, FormaPago } from 'app/interfaces';
 
 // pipes
 import { AjustarTextoPipe } from '@shared/pipes/ajustar-texto.pipe';
-import { MyValidators } from 'app/utils';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+
+import { DialogData, FormValidationService } from '@shared';
 
 @Component({
   selector: 'app-form-abono',
@@ -71,7 +69,7 @@ export class FormAbonoComponent implements OnInit {
 
   private sweetalert2Service = inject(Sweetalert2Service);
   private abonosFacturaVentaService = inject(AbonosFacturaVentaService);
-  private validatorsService = inject(ValidatorsService);
+  private facturaVentaService = inject(FacturaVentaService);
   private formValidationService = inject(FormValidationService);
   private formaPagoService = inject(FormaPagoService);
 
@@ -175,6 +173,13 @@ export class FormAbonoComponent implements OnInit {
   getAbonos() {
     this.abonosFacturaVentaService.findByFactura(this.facturaId()).subscribe(data => {
       this.abonos.set(Array.isArray(data) ? data : [data]);
+
+      if (!data || (Array.isArray(data) && data.length === 0)) {
+        this.facturaVentaService.get(this.facturaId()).subscribe(data => {
+          this.saldo.set(data.saldo);
+        });
+        return;
+      }
 
       // Supongamos que `data` contiene `factura_venta` con el campo `saldo`
       const facturaVenta = Array.isArray(data) ? data[0].factura_venta : data.facturaVenta;

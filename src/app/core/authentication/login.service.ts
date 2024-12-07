@@ -11,11 +11,9 @@ import { environment } from '@env/environment';
 })
 export class LoginService {
   protected readonly http = inject(HttpClient);
-  private apiUrl = `${environment.apiUrl}auth`;
+  private apiUrl = `${environment.apiUrl}/auth`;
 
   login(usuario: string, password: string, rememberMe = false) {
-    console.log(' servicio login http');
-
     return this.http
       .post<any>(`${this.apiUrl}/login`, { usuario, password })
       .pipe(map(token => ({ access_token: token.accessToken, token_type: 'Bearer' })));

@@ -23,8 +23,10 @@ import { FacturaVentaService } from 'app/services';
 // pipes
 import { CurrencyPipe, DatePipe, JsonPipe } from '@angular/common';
 
-import { PageHeaderComponent } from '@shared';
+// components
+import { DetalleVentasComponent } from '../detalle-ventas/detalle-ventas.component';
 import { FormAbonoComponent } from 'app/routes/factura/form-abono/form-abono.component';
+import { PageHeaderComponent } from '@shared';
 
 @Component({
   selector: 'app-factura-ventas',
@@ -32,8 +34,6 @@ import { FormAbonoComponent } from 'app/routes/factura/form-abono/form-abono.com
   imports: [
     CurrencyPipe,
     DatePipe,
-    FormAbonoComponent,
-    JsonPipe,
     MatButtonModule,
     MatCardModule,
     MatDatepickerModule,
@@ -90,8 +90,6 @@ export class FacturaVentasComponent implements OnInit {
     this.startOfMonth.set(new Date()); // Primer día del mes
     this.endOfMonth.set(new Date()); // Último día del mes
 
-    console.log(this.startOfMonth(), this.endOfMonth());
-
     // Escuchar cambios en el formulario de rango de fechas
     this.range.valueChanges.subscribe(rangeValues => {
       const { start, end } = rangeValues;
@@ -107,8 +105,6 @@ export class FacturaVentasComponent implements OnInit {
   }
 
   getAll() {
-    console.log('this.startOfMonth()', this.startOfMonth(), 'this.endOfMonth()', this.endOfMonth());
-
     this.facturaVentaService.getAll(this.startOfMonth(), this.endOfMonth()).subscribe({
       next: data => {
         this.facturaVenta.set(data);
@@ -131,6 +127,24 @@ export class FacturaVentasComponent implements OnInit {
       height: '90vh', // Ajusta el alto del diálogo
       maxWidth: '70vw', // Máximo ancho del diálogo
       maxHeight: '90vh', // Máximo alto del diálogo
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.estado.set(result);
+      }
+      this.getAll();
+    });
+  }
+
+  openDialogDetalle(id: string): void {
+    const dialogRef = this.dialog.open(DetalleVentasComponent, {
+      data: { id },
+      disableClose: true,
+      width: '70vw', // Ajusta el ancho del diálogo
+      height: '95vh', // Ajusta el alto del diálogo
+      maxWidth: '70vw', // Máximo ancho del diálogo
+      maxHeight: '95vh', // Máximo alto del diálogo
     });
 
     dialogRef.afterClosed().subscribe(result => {

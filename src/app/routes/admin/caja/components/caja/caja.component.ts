@@ -74,13 +74,11 @@ export class CajaComponent implements OnInit {
 
   edit(id: string) {
     this.openDialog('Editar', id, this.username());
-    console.log(this.username());
   }
 
   delete(id: string) {
     this.sweetalert2Service.swalDelete('¿Desea eliminar la caja?').subscribe(confirmed => {
       if (confirmed) {
-        console.log('this.username()', this.username());
         this.cajaService.patch(id, this.username()).subscribe(() => {
           this.cajaService.delete(id).subscribe(() => {
             this.sweetalert2Service.swalSuccess('La caja se eliminó correctamente');

@@ -68,16 +68,13 @@ export class LoginComponent {
       const { username, password } = this.loginForm.getRawValue();
       this.authService.login(username, password).subscribe({
         next: data => {
-          console.log('ingreso del usuario', data);
           // Guardar el usuario en localStorage
           this.router.navigateByUrl('/dashboard');
         },
         error: (err: HttpErrorResponse) => {
-          console.log('No ingreso del usuario');
           console.error('Login failed:', err);
           this.status.set('failed');
           this.sweetalert2Service.swalwarning('Usuario o Contraseña incorrecta');
-          console.log(this.status());
         },
       });
     }

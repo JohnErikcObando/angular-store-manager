@@ -33,8 +33,8 @@ export class FacturaVentaService {
 
   getAll(startOfMonth: Date, endOfMonth: Date) {
     const params = {
-      fechaInicio: startOfMonth.toISOString(),
-      fechaFin: endOfMonth.toISOString(),
+      fechaInicio: startOfMonth.toISOString().split('T')[0], // Solo YYYY-MM-DD
+      fechaFin: endOfMonth.toISOString().split('T')[0], // Solo YYYY-MM-DD
     };
 
     return this.http.get<FacturaVenta[]>(this.apiUrl, { params });

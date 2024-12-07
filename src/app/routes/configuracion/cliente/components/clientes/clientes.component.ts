@@ -15,17 +15,18 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Cliente } from 'app/interfaces';
 
 // services
-import { Sweetalert2Service } from '@shared/services/sweetalert2.service';
 import { ClienteService } from 'app/services/cliente.service';
+import { Sweetalert2Service } from '@shared/services/sweetalert2.service';
 
-import { PageHeaderComponent } from '@shared';
 import { FormClienteComponent } from '../form-cliente/form-cliente.component';
+import { PageHeaderComponent } from '@shared';
 
 @Component({
   selector: 'app-clientes',
   standalone: true,
   imports: [
     MatButtonModule,
+    MatCardModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -33,7 +34,6 @@ import { FormClienteComponent } from '../form-cliente/form-cliente.component';
     MatProgressSpinnerModule,
     MatTableModule,
     PageHeaderComponent,
-    MatCardModule,
   ],
   templateUrl: './clientes.component.html',
   styleUrl: './clientes.component.scss',

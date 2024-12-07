@@ -99,8 +99,6 @@ export class FormCategoriaComponent implements OnInit {
   }
 
   save() {
-    console.log('valid', this.form.valid, 'this.form.value', this.form.value);
-
     if (this.form.valid) {
       if (this.botonAccion() === 'Guardar') {
         this.create();
@@ -114,8 +112,6 @@ export class FormCategoriaComponent implements OnInit {
 
   create() {
     const data = this.form.value;
-
-    console.log('categoria', data);
 
     data.usuarioModif = this.data.username;
 

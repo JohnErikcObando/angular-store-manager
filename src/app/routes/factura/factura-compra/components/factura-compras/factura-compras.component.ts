@@ -116,8 +116,6 @@ export class FacturaComprasComponent implements OnInit {
   }
 
   getAll() {
-    console.log('this.startOfMonth()', this.startOfMonth(), 'this.endOfMonth()', this.endOfMonth());
-
     this.facturaCompraService.getAll(this.startOfMonth(), this.endOfMonth()).subscribe({
       next: data => {
         const mappedData = data.map((item: any) => ({
@@ -131,7 +129,6 @@ export class FacturaComprasComponent implements OnInit {
         }));
 
         this.facturaCompra.set(mappedData);
-        console.log(this.facturaCompra());
 
         this.dataSource = new MatTableDataSource<Factura>(mappedData);
         this.dataSource.paginator = this.paginator;

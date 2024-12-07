@@ -18,3 +18,4 @@ export * from './proveedor.service';
 export * from './proveedor.service';
 export * from './rolUsuario.service';
 export * from './usuario.service';
+export * from './venta.service';

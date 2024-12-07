@@ -44,8 +44,6 @@ export class CajaService {
   }
 
   patch(id: string, usuarioModif: string) {
-    console.log('usuarioModif', usuarioModif);
-
     return this.http.patch<Caja>(`${this.apiUrl}/${id}/usuariomodif`, { usuarioModif });
   }
 

@@ -137,8 +137,6 @@ export class FormUsuarioComponent implements OnInit {
     this.usuarioService.get(usuarioId).subscribe({
       next: user => {
         this.form.patchValue(user);
-        console.log('Usuario cargado:', user);
-        console.log('Tipo', this.form.get('activo')?.value || 0);
       },
       error: () => {
         this.usuario.set([]);

@@ -1,16 +1,15 @@
 import {
+  ChangeDetectionStrategy,
   Component,
+  OnInit,
+  ViewChild,
   inject,
   signal,
-  ViewChild,
-  OnInit,
-  ChangeDetectionStrategy,
 } from '@angular/core';
 
 // material
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -24,6 +23,7 @@ import { Inventario } from 'app/interfaces';
 // services
 import { InventarioService } from 'app/services';
 
+// components
 import { PageHeaderComponent } from '@shared';
 
 @Component({

@@ -125,8 +125,6 @@ export class FormCajaComponent implements OnInit {
 
     data.usuarioModif = this.data.username;
 
-    console.log('data caja', data);
-
     this.cajaService.update(this.cajaId(), data).subscribe(rta => {
       this.sweetalert2Service.swalSuccess('La caja se edito Correctamente');
       this.dialogRef.close();

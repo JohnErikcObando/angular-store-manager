@@ -104,6 +104,10 @@
                 <button mat-icon-button (click)="openDialog(element.id)">
                   <mat-icon class="mat-primary">currency_exchange</mat-icon>
                 </button>
+
+                <button mat-icon-button (click)="openDialogDetalle(element.id)">
+                  <mat-icon class="mat-primary">format_list_bulleted</mat-icon>
+                </button>
               </td>
             </ng-container>
 
@@ -128,6 +132,7 @@
           aria-label="Select page of periodic elements"
         >
         </mat-paginator>
+        <br />
       </mat-card-footer>
     </mat-card>
   </div>

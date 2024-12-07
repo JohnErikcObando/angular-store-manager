@@ -43,8 +43,6 @@ export class AuthService {
   }
 
   refresh() {
-    console.log('se ejecuto el refresh');
-
     return this.loginService
       .refresh(filterObject({ refresh_token: this.tokenService.getRefreshToken() }))
       .pipe(
@@ -84,8 +82,6 @@ export class AuthService {
   // Guardar el usuario en el localStorage
   setUser(user: any): void {
     // localStorage.setItem(this.storageKey, JSON.stringify(user));
-    console.log('localStorage');
-
     localStorage.setItem(this.storageKey, JSON.stringify(user));
   }
 
