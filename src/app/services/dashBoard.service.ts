@@ -23,32 +23,32 @@ export class DashBoardService {
   constructor() {}
 
   getMovimientosMes() {
-    const url = `${this.apiUrl}movimientos-tipo-mes`;
+    const url = `${this.apiUrl}/movimientos-tipo-mes`;
     return this.http.get<MovimientoTipoMes[]>(url).pipe(retry(3));
   }
 
   getCategoriaMes() {
-    const url = `${this.apiUrl}categoria-mes`;
+    const url = `${this.apiUrl}/categoria-mes`;
     return this.http.get<MovimientoTipoMes[]>(url).pipe(retry(3));
   }
 
   getProductosMes() {
-    const url = `${this.apiUrl}productos-mas-vendidos-por-mes`;
+    const url = `${this.apiUrl}/productos-mas-vendidos-por-mes`;
     return this.http.get<ProductosVendidosPorMes[]>(url).pipe(retry(3));
   }
 
   getVentasDia() {
-    const url = `${this.apiUrl}ventas-por-dia`;
+    const url = `${this.apiUrl}/ventas-por-dia`;
     return this.http.get<VentasPorDia[]>(url).pipe(retry(3));
   }
 
   getVentasMes() {
-    const url = `${this.apiUrl}ventas-por-mes`;
+    const url = `${this.apiUrl}/ventas-por-mes`;
     return this.http.get<VentasPorMes[]>(url).pipe(retry(3));
   }
 
   getVentasSemana() {
-    const url = `${this.apiUrl}ventas-por-semana`;
+    const url = `${this.apiUrl}/ventas-por-semana`;
     return this.http.get<VentasPorSemana[]>(url).pipe(retry(3));
   }
 }
