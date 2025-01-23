@@ -24,8 +24,9 @@
 }
 
 .table-container {
-  max-height: 350px; /* Adjust the height as needed */
+  height: calc(90vh - 300px);
   overflow-y: auto;
+  overflow-x: auto;
 }
 
 .mat-card-header {
@@ -96,6 +97,7 @@ th {
     padding: 8px;
   }
 
+
   .mat-card-header {
     flex-direction: column;
     align-items: flex-start;
@@ -111,3 +113,5 @@ th {
     width: 100%;
   }
 }
+
+

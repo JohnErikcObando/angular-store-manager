@@ -20,5 +20,16 @@ export interface FacturaVenta {
   detalleVenta: Venta;
 }
 
+export interface ReporteFacturaVenta {
+  factura: string;
+  fecha: string;
+  caja: string;
+  cliente: string;
+  formaPago: string;
+  total: number;
+  abono: number;
+  saldo: number;
+}
+
 export interface CreateFacturaVentaDTO extends Omit<FacturaVenta, 'id'> {}
 export interface UpdateFacturaVentaDTO extends Partial<CreateFacturaVentaDTO> {}

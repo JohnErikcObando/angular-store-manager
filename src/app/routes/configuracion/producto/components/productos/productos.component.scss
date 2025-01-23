@@ -1,6 +1,7 @@
 .table-container {
-  max-height: 360px; /* Adjust the height as needed */
+  height: calc(90vh - 300px);
   overflow-y: auto;
+  overflow-x: auto;
 }
 
 .mat-card-header {

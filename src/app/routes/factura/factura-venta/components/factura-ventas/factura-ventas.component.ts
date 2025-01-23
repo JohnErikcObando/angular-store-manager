@@ -15,7 +15,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
 // interfaces
-import { FacturaVenta, Venta } from 'app/interfaces';
+import { FacturaVenta, ReporteFacturaVenta, Venta } from 'app/interfaces';
 
 // services
 import { FacturaVentaService } from 'app/services';
@@ -27,6 +27,8 @@ import { CurrencyPipe, DatePipe, JsonPipe } from '@angular/common';
 import { DetalleVentasComponent } from '../detalle-ventas/detalle-ventas.component';
 import { FormAbonoComponent } from 'app/routes/factura/form-abono/form-abono.component';
 import { PageHeaderComponent } from '@shared';
+import { map } from 'rxjs';
+import { Cliente } from '../../../../../interfaces/cliente';
 
 @Component({
   selector: 'app-factura-ventas',
@@ -51,7 +53,7 @@ import { PageHeaderComponent } from '@shared';
   styleUrl: './factura-ventas.component.scss',
 })
 export class FacturaVentasComponent implements OnInit {
-  facturaVenta = signal<FacturaVenta[]>([]);
+  facturaVenta = signal<ReporteFacturaVenta[]>([]);
   venta = signal<Venta[]>([]);
   startOfMonth = signal(new Date());
   endOfMonth = signal(new Date());
@@ -68,7 +70,7 @@ export class FacturaVentasComponent implements OnInit {
     'accion',
   ];
 
-  dataSource = new MatTableDataSource<FacturaVenta>();
+  dataSource = new MatTableDataSource<ReporteFacturaVenta>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   readonly estado = signal('Guardar');
@@ -107,8 +109,21 @@ export class FacturaVentasComponent implements OnInit {
   getAll() {
     this.facturaVentaService.getAll(this.startOfMonth(), this.endOfMonth()).subscribe({
       next: data => {
-        this.facturaVenta.set(data);
-        this.dataSource = new MatTableDataSource<FacturaVenta>(data);
+        const mappedData = data.map((item: any) => ({
+          factura: item.id,
+          fecha: item.fecha,
+          caja: item.caja.nombre,
+          cliente: item.cliente.nombre,
+          formaPago: item.forma_pago.nombre,
+          total: item.valor,
+          abono: item.abono,
+          saldo: item.saldo,
+        }));
+
+        console.log(mappedData);
+
+        this.facturaVenta.set(mappedData);
+        this.dataSource = new MatTableDataSource<ReporteFacturaVenta>(mappedData);
         this.dataSource.paginator = this.paginator;
       },
     });
@@ -138,13 +153,15 @@ export class FacturaVentasComponent implements OnInit {
   }
 
   openDialogDetalle(id: string): void {
+    console.log(id);
+
     const dialogRef = this.dialog.open(DetalleVentasComponent, {
       data: { id },
       disableClose: true,
       width: '70vw', // Ajusta el ancho del diálogo
-      height: '95vh', // Ajusta el alto del diálogo
+      height: '53vh', // Ajusta el alto del diálogo
       maxWidth: '70vw', // Máximo ancho del diálogo
-      maxHeight: '95vh', // Máximo alto del diálogo
+      maxHeight: '53vh', // Máximo alto del diálogo
     });
 
     dialogRef.afterClosed().subscribe(result => {

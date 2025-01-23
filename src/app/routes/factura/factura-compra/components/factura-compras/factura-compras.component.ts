@@ -20,7 +20,7 @@ import { Compra } from 'app/interfaces';
 import { FacturaCompraService } from 'app/services';
 
 // pipes
-import { CurrencyPipe, DatePipe } from '@angular/common';
+import { CurrencyPipe } from '@angular/common';
 
 import { PageHeaderComponent } from '@shared';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -41,7 +41,6 @@ interface Factura {
   standalone: true,
   imports: [
     CurrencyPipe,
-    DatePipe,
     MatButtonModule,
     MatCardModule,
     MatDatepickerModule,
