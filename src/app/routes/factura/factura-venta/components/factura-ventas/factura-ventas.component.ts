@@ -27,8 +27,8 @@ import { CurrencyPipe, DatePipe, JsonPipe } from '@angular/common';
 import { DetalleVentasComponent } from '../detalle-ventas/detalle-ventas.component';
 import { FormAbonoComponent } from 'app/routes/factura/form-abono/form-abono.component';
 import { PageHeaderComponent } from '@shared';
+import { ExcelService } from '@shared/services/excel.service';
 import { map } from 'rxjs';
-import { Cliente } from '../../../../../interfaces/cliente';
 
 @Component({
   selector: 'app-factura-ventas',
@@ -54,6 +54,7 @@ import { Cliente } from '../../../../../interfaces/cliente';
 })
 export class FacturaVentasComponent implements OnInit {
   facturaVenta = signal<ReporteFacturaVenta[]>([]);
+  facturaReporte = signal<FacturaVenta[]>([]);
   venta = signal<Venta[]>([]);
   startOfMonth = signal(new Date());
   endOfMonth = signal(new Date());
@@ -83,6 +84,7 @@ export class FacturaVentasComponent implements OnInit {
 
   private facturaVentaService = inject(FacturaVentaService);
   readonly dialog = inject(MatDialog);
+  private excelService = inject(ExcelService);
 
   resultsLength = 0;
   isLoadingResults = true;
@@ -109,6 +111,7 @@ export class FacturaVentasComponent implements OnInit {
   getAll() {
     this.facturaVentaService.getAll(this.startOfMonth(), this.endOfMonth()).subscribe({
       next: data => {
+        this.facturaReporte.set(data);
         const mappedData = data.map((item: any) => ({
           factura: item.id,
           fecha: item.fecha,
@@ -120,7 +123,7 @@ export class FacturaVentasComponent implements OnInit {
           saldo: item.saldo,
         }));
 
-        console.log(mappedData);
+        console.log(data);
 
         this.facturaVenta.set(mappedData);
         this.dataSource = new MatTableDataSource<ReporteFacturaVenta>(mappedData);
@@ -170,5 +173,41 @@ export class FacturaVentasComponent implements OnInit {
       }
       this.getAll();
     });
+  }
+
+  exportarExcel() {
+    const data: FacturaVenta[] = this.facturaReporte();
+
+    const facturasArray = Array.isArray(data) ? data : [data];
+
+    const mappedData = facturasArray.flatMap(factura => {
+      const facturaInfo = {
+        ID: factura.id,
+        Fecha: factura.fecha,
+        Valor: factura.valor,
+        Descuento: factura.descuento,
+        Total: factura.total,
+        Abono: factura.abono,
+        Saldo: factura.saldo,
+        Anulado: factura.anulado ? 'Sí' : 'No',
+        Descripción: factura.descripcion,
+        Caja: factura.cajaId,
+        Cliente: factura.cliente.nombre,
+      };
+
+      const detalles = Array.isArray(factura.detalleVenta)
+        ? factura.detalleVenta.map((venta: Venta) => ({
+            ...facturaInfo,
+            ProductoID: venta.id,
+            Cantidad: venta.valor,
+            Subtotal: venta.subtotal,
+            TotalDetalle: venta.total,
+          }))
+          : [];
+
+      return detalles.length ? detalles : [facturaInfo];
+    });
+
+    this.excelService.exportToExcel(mappedData, 'Reporte Facturas Ventas');
   }
 }

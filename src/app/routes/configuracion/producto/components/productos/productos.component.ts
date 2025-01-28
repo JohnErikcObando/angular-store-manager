@@ -22,6 +22,7 @@ import { PageHeaderComponent } from '@shared';
 import { FormProductosComponent } from './../form-productos/form-productos.component';
 import { MarcaService } from '../../../../../services/marca.service';
 import { CurrencyPipe } from '@angular/common';
+import { ExcelService } from '@shared/services/excel.service';
 
 @Component({
   selector: 'app-productos',
@@ -67,6 +68,7 @@ export class ProductosComponent implements OnInit {
 
   private productoService = inject(ProductoService);
   private sweetalert2Service = inject(Sweetalert2Service);
+  private excelService = inject(ExcelService);
 
   ngOnInit(): void {
     this.username.set(localStorage.getItem('username') || 'MiMascota');
@@ -119,5 +121,21 @@ export class ProductosComponent implements OnInit {
       }
       this.getAll();
     });
+  }
+
+  exportarExcel() {
+    // Mapeo específico para exportar a Excel
+    const mappedData = this.productos().map(producto => ({
+      Nombre: producto.nombre,
+      Marca: producto.marca?.nombre || '', // Manejo opcional si no existe
+      Categoría: producto.categoria?.nombre || '',
+      Código: producto.codigo,
+      Descripción: producto.descripcion,
+      Valor: producto.valor,
+      Costo: producto.costo,
+    }));
+
+    console.log('Datos mapeados para Excel:', mappedData);
+    this.excelService.exportToExcel(mappedData, 'Productos');
   }
 }

@@ -1,8 +1,9 @@
+import { Cliente } from './cliente';
 import { DetalleVenta } from './detalle-venta';
 import { Venta } from './venta';
 export interface FacturaVenta {
   id: string;
-  clienteId: string;
+  cliente: Cliente;
   cajaId: number;
   formaPagoId: number;
   movimientoId: null;
